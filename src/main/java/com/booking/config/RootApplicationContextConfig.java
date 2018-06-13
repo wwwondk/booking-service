@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
 		"com.booking.service",
 		"com.booking.dao"
 })
-//@Import({DBConfig.class})
+@Import({DBConfig.class})
 public class RootApplicationContextConfig {
 	
 }
