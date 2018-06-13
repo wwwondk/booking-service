@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.booking.dao.MyReservationDao">
+	<select id="selectAll" parameterType="int" resultType="com.booking.dto.MyReservationDto">
+		SELECT i.id, i.product_id, i.general_ticket_count, i.youth_ticket_count, i.child_ticket_count, i.reservation_date, i.reservation_type, i.total_price, p.name product_name
+		FROM reservation_info i INNER JOIN product p ON i.product_id = p.id
+		WHERE user_id = #{id}
+		ORDER BY reservation_type, id DESC
+	</select>
+
+	<select id="selectReservationTypeCount" parameterType="int" resultType="com.booking.dto.ReservationTypeDto">
+		SELECT reservation_type, COUNT(*) count
+		FROM reservation_info 
+		WHERE user_id = #{id}
+		GROUP BY reservation_type
+	</select>
+	
+	<update id="updateReservationType" parameterType="java.util.Map">
+		UPDATE reservation_info
+		SET
+		reservation_type = #{reservation_type}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.booking.dao.ProductDao">
+	<select id="selectAll" parameterType="Integer" resultType="com.booking.dto.ProductDto">
+		<include refid="selectProductList" />
+		<include refid="limit" />
+	</select>
+	
+	<select id="selectByCategory" parameterType="hashmap" resultType="com.booking.dto.ProductDto">
+		<include refid="selectProductList" />
+		 	AND p.category_id = #{categoryId}
+		<include refid="limit" />
+	</select>
+	
+	<sql id="selectProductList">
+		SELECT DISTINCT p.id product_id, p.name product_name, p.description product_description, di.place_name, f.id file_id, f.file_name, f.save_file_name
+		FROM product p INNER JOIN display_info di ON p.id = di.product_id
+				INNER JOIN product_image pi ON p.id = pi.product_id
+                INNER JOIN file f ON pi.file_id = f.id
+		WHERE p.sales_start <![CDATA[<=]]> CURDATE() AND p.sales_end <![CDATA[>=]]> CURDATE() AND pi.type = 1
+	</sql>
+	
+	<sql id="limit">
+		LIMIT #{page}, 11
+	</sql>
+	
+	<select id="selectProductSummary" parameterType="Integer" resultType="com.booking.dto.ProductSummaryDto">
+		SELECT p.id, p.name, d.observation_time, d.display_start, d.display_end, d.place_name, d.place_lot, d.place_street
+		FROM product p
+		INNER JOIN display_info d ON p.id = d.product_id
+		WHERE p.id = #{productId}
+	</select>
+</mapper>
