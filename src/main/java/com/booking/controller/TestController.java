@@ -8,8 +8,7 @@ public class TestController {
 	
 	@GetMapping("/")
 	public String test(){
-		System.out.println("HELLO");
-		return "mainpage";
+		return "main";
 	}
 
 }

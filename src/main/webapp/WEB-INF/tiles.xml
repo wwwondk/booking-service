@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+	
+<tiles-definitions>
+
+	<!-- Default Layout -->
+	<definition name="base-definition" template="/WEB-INF/views/layout.jsp">
+        <put-attribute name="title" value="네이버 예약시스템" />
+    	<put-attribute name="css" value="/WEB-INF/views/common/css.jsp" />
+        <put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
+        <put-attribute name="js" value="/WEB-INF/views/common/js.jsp" />
+	</definition>
+	
+	<!-- Main Page Content -->
+	<definition name="main.content" template="/WEB-INF/views/layout/mainpage.jsp">
+		<put-attribute name="promotion" value="/WEB-INF/views/mainpage/promotion.jsp"/>
+		<put-attribute name="productList" value="/WEB-INF/views/mainpage/productList.jsp"/>
+		<put-attribute name="product-list-template" value="/WEB-INF/views/mainpage/product-list-template.jsp"/>
+	</definition>
+	
+	<!-- Detail Page Content -->
+	<definition name="detail.content" template="/WEB-INF/views/layout/detail.jsp">
+		<put-attribute name="title" value="/WEB-INF/views/detail/title.jsp" />
+		<put-attribute name="productInformation" value="/WEB-INF/views/detail/productInformation.jsp" />
+		<put-attribute name="event" value="/WEB-INF/views/detail/event.jsp" />
+		
+		<!-- <put-attribute name="?" value="review.content" > -->
+		<put-attribute name="grade" value="/WEB-INF/views/review/grade.jsp" />
+		<put-attribute name="reviewList" value="/WEB-INF/views/review/reviewList.jsp" />
+		
+		<put-attribute name="detailInformation" value="/WEB-INF/views/detail/detailInformation.jsp" />	
+	</definition>	
+	
+	<!-- Reserve Page Content -->
+	<definition name="reserve.content" template="/WEB-INF/views/layout/reserve.jsp">
+		<put-attribute name="title" value="/WEB-INF/views/reserve/title.jsp" />
+		<put-attribute name="productDetails" value="/WEB-INF/views/reserve/productDetails.jsp" />
+		<put-attribute name="bookingTicket" value="/WEB-INF/views/reserve/bookingTicket.jsp" />
+		<put-attribute name="bookingForm" value="/WEB-INF/views/reserve/bookingForm.jsp" />	
+	</definition>
+	
+	<!-- Review Write Page Content -->
+	<definition name="reviewWrite.content" template="/WEB-INF/views/layout/reviewWrite.jsp">
+		<put-attribute name="reviewTitle" value="/WEB-INF/views/reviewWrite/reviewTitle.jsp" />
+		<put-attribute name="starpoint" value="/WEB-INF/views/reviewWrite/starpoint.jsp" />
+		<put-attribute name="reviewForm" value="/WEB-INF/views/reviewWrite/reviewForm.jsp" />
+		<put-attribute name="photoForm" value="/WEB-INF/views/reviewWrite/photoForm.jsp" />
+	</definition>
+	
+	<!-- Review List Page Content -->
+	<definition name="review.content" template="/WEB-INF/views/layout/review.jsp">
+		<put-attribute name="grade" value="/WEB-INF/views/review/grade.jsp" />
+		<put-attribute name="reviewList" value="/WEB-INF/views/review/reviewList.jsp" />
+	</definition>
+	
+	<!-- My Reservation Page Content -->
+	<definition name="myreservation.content" template="/WEB-INF/views/layout/myreservation.jsp">
+		<put-attribute name="mySummary" value="/WEB-INF/views/myreservation/mySummary.jsp" />
+		<put-attribute name="myreservationList" value="/WEB-INF/views/myreservation/myreservationList.jsp" />
+		<put-attribute name="canclePopup" value="/WEB-INF/views/myreservation/canclePopup.jsp" />
+	</definition>
+	
+	<!-- Main Page -->
+	<definition name="main" extends="base-definition">
+		<put-attribute name="content" value="main.content"/>
+		<put-attribute name="page-js" value="/WEB-INF/views/layout/page-js/home-js.jsp"/>
+	</definition>
+		
+	<!-- Detail Page -->
+	<definition name="detail" extends="base-definition">
+		<put-attribute name="content" value="detail.content"/>
+	</definition>	
+	
+	<!-- Reserve Page -->
+	<definition name="reserve" extends="base-definition">
+		<put-attribute name="content" value="reserve.content"/>
+		<put-attribute name="page-js" value="/WEB-INF/views/layout/page-js/reserve-js.jsp"/>
+	</definition>
+		
+	<!-- Review List Page -->
+	<definition name="review" extends="base-definition">
+		<put-attribute name="content" value="review.content"/>
+	</definition>
+		
+	<!-- Review Write Page -->
+	<definition name="reviewWrite" extends="base-definition">
+		<put-attribute name="content" value="reviewWrite.content"/>
+		<put-attribute name="page-js" value="/WEB-INF/views/layout/page-js/reviewWrite-js.jsp"/>
+	</definition>	
+	
+	<!-- My Reservation Page -->
+	<definition name="myreservation" extends="base-definition">
+		<put-attribute name="content" value="myreservation.content"/>
+		<put-attribute name="page-js" value="/WEB-INF/views/layout/page-js/myreservation-js.jsp"/>
+	</definition>
+		
+</tiles-definitions>
