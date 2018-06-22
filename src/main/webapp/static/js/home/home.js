@@ -4,7 +4,7 @@ $(function(){
 	// 카테고리
 	var categoryId = 0;
 	var page = 0;
-	var maxPage = 1;
+	var maxPage = 1; // '전체' 카테고리 탭일 때, 초기화 필요
 	
 	// 상품리스트
 	var source = $('#product-template').html();
@@ -15,7 +15,6 @@ $(function(){
 	
 	function clickCategory(e){
 		categoryId = $(e.currentTarget).data('category');
-		console.log('click category '+ categoryId );
 		var categoryCount = $('#cate'+categoryId).val();
 		
 		$('ul.event_tab_lst li.item a.active').removeClass('active');
