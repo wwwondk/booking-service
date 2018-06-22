@@ -10,14 +10,18 @@
 	<c:forEach var="category" items="${categoryList}" varStatus="status">
 	    <li class="item" data-category="${category.id}">
 	    	<input type="hidden" id="cate${category.id}" value="${category.productCount }"/>
+		 	<a class="anchor"> <span>${category.name}</span> </a>
+		 <!--	
 		 <c:choose>
 			<c:when test="${status.last}">
 	            <a class="anchor last"> <span>${category.name}</span> </a>
+
 	    	</c:when>
 		 	<c:otherwise>
 	            <a class="anchor"> <span>${category.name}</span> </a>
 	     	</c:otherwise>
 	    </c:choose>
+	    -->
 		</li>
 	</c:forEach>
     </ul>
