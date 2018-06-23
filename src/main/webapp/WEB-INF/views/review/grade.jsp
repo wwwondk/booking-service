@@ -6,10 +6,10 @@
  		<em class="graph_value" style="width: 88%;"></em> 
       	</span> 
 	<strong class="text_value"> 
-		<span>4.4</span> 
+		<span>${product.avgScore }</span> 
 		<em class="total">5.0</em> 
 	</strong> 
 	<span class="join_count">
-		<em class="green">20건</em> 등록
+		<em class="green">${product.reviewCount }건</em> 등록
 	</span>
 </div>
