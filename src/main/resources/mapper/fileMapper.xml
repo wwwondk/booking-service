@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.booking.dao.FileDao">
+	<select id="selectSaveFileName" parameterType="Integer" resultType="String">
+		SELECT save_file_name
+		FROM file
+		WHERE id = #{fileId}
+	</select>
+		
+	<select id="selectProductImageList" parameterType="Integer" resultType="Integer">
+		SELECT file_id
+		FROM product_image
+		WHERE product_id = #{productId} AND (type = 1 OR type = 2)
+	</select>
+	
+	<select id="selectProductNoticeImageList" parameterType="Integer" resultType="Integer">
+		SELECT file_id
+		FROM product_image
+		WHERE product_id = #{productId} AND (type = 3)
+	</select>
+
+</mapper>
