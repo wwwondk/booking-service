@@ -22,8 +22,9 @@ public class FileRestController {
         this.fileService = fileService;
     }
 
-    @GetMapping("/{id:[\\d]+}")
-    public FileSystemResource test(@PathVariable int id) {
+    @GetMapping("/{id}")
+    public FileSystemResource getFile(@PathVariable int id) {
+    	System.out.println(fileService.selectSaveFileName(id));
         File file = new File(fileService.selectSaveFileName(id));
         if (!file.exists()) {
             throw new RuntimeException("File Not Found");

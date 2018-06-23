@@ -1,17 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <div class="section_visual">
                     <div class="pagination">
                         <div class="bg_pagination"></div>
                         <div class="figure_pagination">
                             <span class="num">1</span>
-                            <span class="num off">/ <span>3</span></span>
+                            <span class="num off">/ <span>${product.bannerImageIdList.size() }</span></span>
                         </div>
                     </div>
                     <div class="group_visual">
                         <div>
                             <div class="container_visual" style="width: 414px;">
                                 <ul class="visual_img">
+                                	<c:forEach var="banner" items="${product.bannerImageIdList }">
+                                	<li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="/files/${banner }"> <span class="img_bg"></span>
+                                        <div class="visual_txt">
+                                            <div class="visual_txt_inn">
+                                                <h2 class="visual_txt_tit"> <span>${product.name }</span> </h2>
+                                                <p class="visual_txt_dsc"></p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                	</c:forEach>
                                     <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170119_135/1484789767866RPO6o_JPEG/%B7%CE%B9%CC%BF%C0%C1%D9%B8%AE%BF%A7_1242.jpg?type=ff1242_1242"> <span class="img_bg"></span>
                                         <div class="visual_txt">
                                             <div class="visual_txt_inn">

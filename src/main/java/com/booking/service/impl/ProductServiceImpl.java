@@ -11,6 +11,7 @@ import com.booking.dao.ProductPriceDao;
 import com.booking.dto.ProductDetailDto;
 import com.booking.dto.ProductDto;
 import com.booking.dto.ProductSummaryDto;
+import com.booking.service.FileService;
 import com.booking.service.ProductService;
 
 @Service
@@ -19,11 +20,13 @@ public class ProductServiceImpl implements ProductService{
 	final static int PRODUCT_UNIT = 10;
 	private ProductDao productDao;
 	private ProductPriceDao productPriceDao;
+	private FileService fileService;
 	
 	@Autowired
-	public ProductServiceImpl(ProductDao productDao, ProductPriceDao productPriceDao) {
+	public ProductServiceImpl(ProductDao productDao, ProductPriceDao productPriceDao, FileService fileService) {
 		this.productDao = productDao;
 		this.productPriceDao = productPriceDao;
+		this.fileService = fileService;
 	}
 
 	@Override
@@ -52,7 +55,9 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Override
 	public ProductDetailDto selectProductDetail(int productId) {
-		return productDao.selectProductDetail(productId);
+		ProductDetailDto productDetailDto = productDao.selectProductDetail(productId);
+		productDetailDto.setBannerImageIdList(fileService.selectProductImageList(productId));
+		return productDetailDto;
 	}
 
 	@Override
