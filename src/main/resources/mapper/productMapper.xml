@@ -31,4 +31,13 @@
 		INNER JOIN display_info d ON p.id = d.product_id
 		WHERE p.id = #{productId}
 	</select>
+	
+	<select id="selectProductDetail" parameterType="Integer" resultType="com.booking.dto.ProductDetailDto">
+		SELECT p.id, p.name, p.description, p.sales_flag, p.event, pd.content, di.observation_time, di.display_start,
+			di.display_end, di.place_name, di.place_lot, di.place_street, di.tel, di.homepage, di.email, p.avg_score, p.review_count
+		FROM product p
+			INNER JOIN product_detail pd ON p.id = pd.product_id
+			INNER JOIN display_info di ON p.id = di.product_id
+		WHERE p.id = #{productId}
+	</select>
 </mapper>
