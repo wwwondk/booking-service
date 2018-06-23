@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.booking.dao.ProductDao;
 import com.booking.dao.ProductPriceDao;
+import com.booking.dto.ProductDetailDto;
 import com.booking.dto.ProductDto;
 import com.booking.dto.ProductSummaryDto;
 import com.booking.service.ProductService;
@@ -47,6 +48,11 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public ProductSummaryDto selectProductSummary(int productId) {
 		return productDao.selectProductSummary(productId);
+	}
+	
+	@Override
+	public ProductDetailDto selectProductDetail(int productId) {
+		return productDao.selectProductDetail(productId);
 	}
 
 	@Override
