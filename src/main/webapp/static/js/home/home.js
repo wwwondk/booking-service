@@ -94,7 +94,6 @@ $(function(){
 		$('.visual_img').stop().animate({right:(curImgIndex*imgWidth)+'px'}, 500);
 
 	}
-	
-	
+		
 });
 

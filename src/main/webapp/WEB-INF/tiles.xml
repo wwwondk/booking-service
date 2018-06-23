@@ -71,6 +71,7 @@
 	<!-- Detail Page -->
 	<definition name="detail" extends="base-definition">
 		<put-attribute name="content" value="detail.content"/>
+		<put-attribute name="page-js" value="/WEB-INF/views/layout/page-js/detail-js.jsp"/>
 	</definition>	
 	
 	<!-- Reserve Page -->

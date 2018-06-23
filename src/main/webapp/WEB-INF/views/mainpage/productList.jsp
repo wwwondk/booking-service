@@ -42,7 +42,7 @@
          <ul class="lst_event_box" id="left_event_box">
          	<c:forEach var="product" items="${productList}" begin="0" end="8" step="2" varStatus="status">
               <li class="item">
-                  <a href="#" class="item_book">
+                  <a href="/product-detail/${product.productId }" class="item_book">
                       <div class="item_preview"> 
                       	<img alt="${product.productName}" class="img_thumb" src="${product.saveFileName }">
                       	<span class="img_border"></span> 
@@ -61,7 +61,7 @@
          <ul class="lst_event_box" id="right_event_box">
          	<c:forEach var="product" items="${productList}" begin="1" end="9" step="2" varStatus="status">
               <li class="item">
-                  <a href="#" class="item_book">
+                  <a href="/product-detail/${product.productId }" class="item_book">
                       <div class="item_preview"> 
                       	<img alt="${product.productName}" class="img_thumb" src="${product.saveFileName }">
                       	<span class="img_border"></span> 
