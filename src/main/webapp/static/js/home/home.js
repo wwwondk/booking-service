@@ -65,5 +65,32 @@ $(function(){
 		}
 	});
 	
+	// slider
+	var curImgIndex = 0;
+	var maxImgIndex = 2;
+	var imgWidth = 338;
+
+	$('#btn_prev').on('click', clickBtnPre);
+	$('#btn_nxt').on('click', clickBtnNext);
+	
+	function clickBtnPre(){
+		if(curImgIndex <= 0){
+			curImgIndex = maxImgIndex;
+			$('.visual_img').animate({left:-(maxImgIndex*imgWidth)+'px'}, 0);
+		}
+		curImgIndex--;
+		$('.visual_img').animate({left:-(curImgIndex*imgWidth)+'px'}, 500);
+	}
+	
+	function clickBtnNext(){
+		if(curImgIndex >= maxImgIndex){
+			curImgIndex = 0;
+			$('.visual_img').animate({right: '0px'}, 0);
+		}
+		curImgIndex++;
+		$('.visual_img').animate({right:(curImgIndex*imgWidth)+'px'}, 500);
+	}
+	
+	
 });
 
