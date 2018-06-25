@@ -5,7 +5,7 @@
          <li class="item">
              <a href="/product-detail/{{productId}}" class="item_book">
                  <div class="item_preview"> 
-                 	<img alt="{{name}}" class="img_thumb" src="{{saveFileName}}">
+                 	<img alt="{{name}}" class="img_thumb" src="/files/{{fileId}}">
                  	<span class="img_border"></span> 
                  </div>
                  <div class="event_txt">
