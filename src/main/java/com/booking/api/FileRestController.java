@@ -2,6 +2,8 @@ package com.booking.api;
 
 import java.io.File;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +25,13 @@ public class FileRestController {
     }
 
     @GetMapping("/{id}")
-    public FileSystemResource getFile(@PathVariable int id) {
-    	System.out.println(fileService.selectSaveFileName(id));
-        File file = new File(fileService.selectSaveFileName(id));
+    public FileSystemResource downloadFile(@PathVariable int id, HttpServletRequest request) {
+    	
+    	String rootPath = request.getSession().getServletContext().getRealPath("/");
+    	String originalFileName = fileService.selectSaveFileName(id);    	
+    	String filePath = rootPath + originalFileName;
+
+        File file = new File(filePath);
         if (!file.exists()) {
             throw new RuntimeException("File Not Found");
         } else {
