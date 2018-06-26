@@ -24,7 +24,7 @@ public @Data class ProductDetailDto {
     private float avgScore;
     private int reviewCount;
     private List<Integer> bannerImageIdList;
-    private List<CommentDetailDto> comments;
+    private List<ReviewDto> reviews;
     private List<Integer> noticeImageIdList;
     private int descriptionImageId;
 }

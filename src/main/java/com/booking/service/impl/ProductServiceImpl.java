@@ -13,6 +13,7 @@ import com.booking.dto.ProductDto;
 import com.booking.dto.ProductSummaryDto;
 import com.booking.service.FileService;
 import com.booking.service.ProductService;
+import com.booking.service.ReviewService;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -21,12 +22,15 @@ public class ProductServiceImpl implements ProductService{
 	private ProductDao productDao;
 	private ProductPriceDao productPriceDao;
 	private FileService fileService;
+	private ReviewService reviewService;
 	
 	@Autowired
-	public ProductServiceImpl(ProductDao productDao, ProductPriceDao productPriceDao, FileService fileService) {
+	public ProductServiceImpl(ProductDao productDao, ProductPriceDao productPriceDao, 
+			FileService fileService, ReviewService reviewService) {
 		this.productDao = productDao;
 		this.productPriceDao = productPriceDao;
 		this.fileService = fileService;
+		this.reviewService = reviewService;
 	}
 
 	@Override
@@ -57,6 +61,8 @@ public class ProductServiceImpl implements ProductService{
 	public ProductDetailDto selectProductDetail(int productId) {
 		ProductDetailDto productDetailDto = productDao.selectProductDetail(productId);
 		productDetailDto.setBannerImageIdList(fileService.selectProductImageList(productId));
+		productDetailDto.setReviews(reviewService.selectProductReviewList(productId, 0, 3));
+		productDetailDto.setNoticeImageIdList(fileService.selectProductNoticeImageList(productId));
 		return productDetailDto;
 	}
 
