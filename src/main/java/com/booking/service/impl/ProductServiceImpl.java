@@ -63,6 +63,10 @@ public class ProductServiceImpl implements ProductService{
 		productDetailDto.setBannerImageIdList(fileService.selectProductImageList(productId));
 		productDetailDto.setReviews(reviewService.selectProductReviewList(productId, 0, 3));
 		productDetailDto.setNoticeImageIdList(fileService.selectProductNoticeImageList(productId));
+		Integer informationImageId = fileService.selectProductInformationImage(productId);
+		if(informationImageId != null)
+			productDetailDto.setDescriptionImageId(fileService.selectProductInformationImage(productId));
+		
 		return productDetailDto;
 	}
 

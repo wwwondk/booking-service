@@ -19,5 +19,11 @@
 		FROM product_image
 		WHERE product_id = #{productId} AND (type = 3)
 	</select>
+	
+	<select id="selectProductInformationImage" parameterType="Integer" resultType="Integer">
+		SELECT file_id
+		FROM product_image
+		WHERE product_id = #{productId} AND (type = 4)
+	</select>
 
 </mapper>

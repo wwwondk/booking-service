@@ -33,7 +33,7 @@ public class FileRestController {
 
         File file = new File(filePath);
         if (!file.exists()) {
-            throw new RuntimeException("File Not Found");
+            throw new RuntimeException("File Not Found ID=[ "+id+" ]");
         } else {
             return new FileSystemResource(file);
         }

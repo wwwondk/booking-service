@@ -33,5 +33,9 @@ public class FileServiceImpl implements FileService {
 		return fileDao.selectProductNoticeImageList(productId);
 	}
 	
+	@Override
+	public Integer selectProductInformationImage(int productId){
+		return fileDao.selectProductInformationImage(productId);
+	}
 	
 }

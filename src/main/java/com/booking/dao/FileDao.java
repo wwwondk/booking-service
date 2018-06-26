@@ -9,4 +9,5 @@ public interface FileDao {
 	public String selectSaveFileName(int fileId);
 	public List<Integer> selectProductImageList(int productId);
 	public List<Integer> selectProductNoticeImageList(int productId);
+	public Integer selectProductInformationImage(int productId);
 }
