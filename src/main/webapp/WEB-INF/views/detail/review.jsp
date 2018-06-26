@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
                 <div class="section_review_list">
                     <div class="review_box">
@@ -11,6 +12,21 @@
                                 <span class="join_count"><em class="green">${product.reviewCount }건</em> 등록</span>
                             </div>
                             <ul class="list_short_review">
+                            	<c:forEach var="ritem" items="${reviews }">
+                            	<li class="list_item">
+                                    <div>
+                                        <div class="review_area">
+                                            <div class="thumb_area">
+                                                <a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="/files/${ritem.thumbnailFileId}" alt="리뷰이미지"> </a> <span class="img_count">${ritem.thumbnailCount }</span>                                                </div>
+                                            <h4 class="resoc_name">${product.name }</h4>
+                                            <p class="review">${ritem.comment }</p>
+                                        </div>
+                                        <div class="info_area">
+                                            <div class="review_info"> <span class="grade">${ritem.score }</span> <span class="name">${ritem.nickname }****</span> <span class="date">${ritem.createDate }</span> </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            	</c:forEach>
                                 <li class="list_item">
                                     <div>
                                         <div class="review_area">
