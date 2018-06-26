@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 import lombok.Data;
 
-public @Data class CommentDetailDto {
+public @Data class ReviewDto {
     private int id;
     private String comment;
     private float score;

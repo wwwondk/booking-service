@@ -7,4 +7,15 @@
 		FROM reservation_info ri inner join product p on ri.product_id = p.id
 		WHERE ri.id = #{id}
 	</select>
+	
+	<select id="selectProductReviewList" parameterType="HashMap" resultType="com.booking.dto.ReviewDto">
+		SELECT ruc.id, ruc.comment, ruc.score, ruc.create_date, u.nickname, IFNULL(ruci.file_id, 0) as thumbnailFileId, COUNT(ruci.file_id) thumbnailCount
+		FROM reservation_user_comment ruc
+		INNER JOIN users u ON ruc.user_id = u.id
+		LEFT OUTER JOIN reservation_user_comment_image ruci ON ruc.id = ruci.reservation_user_comment_id 
+		WHERE ruc.product_id = #{productId}
+		GROUP BY ruc.id
+		ORDER BY ruc.create_date
+		LIMIT #{page}, #{limit};
+	</select>
 </mapper>
