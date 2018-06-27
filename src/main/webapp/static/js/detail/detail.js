@@ -73,4 +73,18 @@ $(function(){
 
 	});
 	
+	// 펼쳐보기
+	$('.bk_more').on('click', function(){		
+		var isOpend = $('.store_details').hasClass('close3');
+		if(isOpend === false){
+			$('.store_details').addClass('close3');
+			$('._open').css('display', 'none');
+			$('._close').css('display', 'block');
+		}else{
+			$('.store_details').removeClass('close3');
+			$('._open').css('display', 'block');
+			$('._close').css('display', 'none');
+		}
+	});
+	
 });
