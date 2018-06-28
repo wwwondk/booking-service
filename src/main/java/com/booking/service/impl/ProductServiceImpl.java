@@ -10,6 +10,8 @@ import com.booking.dao.ProductDao;
 import com.booking.dao.ProductPriceDao;
 import com.booking.dto.ProductDetailDto;
 import com.booking.dto.ProductDto;
+import com.booking.dto.ProductPriceDto;
+import com.booking.dto.ProductReservationDto;
 import com.booking.dto.ProductSummaryDto;
 import com.booking.service.FileService;
 import com.booking.service.ProductService;
@@ -71,8 +73,15 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<ProductPriceDao> selectProductPrice(int productId) {
+	public List<ProductPriceDto> selectProductPrice(int productId) {
 		return productPriceDao.selectProductPrice(productId);
+	}
+	
+	@Override
+	public ProductReservationDto selectProductReservation(int productId) {
+		ProductReservationDto productReservationDto = productDao.selectProductReservation(productId);
+		productReservationDto.setProductPrices(productPriceDao.selectProductPrice(productId));
+		return productReservationDto;
 	}
 
 }

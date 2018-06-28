@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.booking.dto.ProductPriceDto;
+
 @Repository
 public interface ProductPriceDao {
-	public List<ProductPriceDao> selectProductPrice(int productId);
+	public List<ProductPriceDto> selectProductPrice(int productId);
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.booking.dto.ProductDetailDto;
 import com.booking.dto.ProductDto;
+import com.booking.dto.ProductReservationDto;
 import com.booking.dto.ProductSummaryDto;
 
 @Repository
@@ -15,4 +16,5 @@ public interface ProductDao {
 	public List<ProductDto> selectByCategory(HashMap<String, Integer> map);
 	public ProductSummaryDto selectProductSummary(int productId);
 	public ProductDetailDto selectProductDetail(int productId);
+	public ProductReservationDto selectProductReservation(int productId);
 }

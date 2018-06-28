@@ -40,4 +40,11 @@
 			INNER JOIN display_info di ON p.id = di.product_id
 		WHERE p.id = #{productId}
 	</select>
+	
+	<select id="selectProductReservation" parameterType="Integer" resultType="com.booking.dto.ProductReservationDto">
+		SELECT p.id, p.name, di.observation_time, di.display_start, di.display_end, di.place_street, di.place_lot, pi.file_id 
+		FROM product p INNER JOIN display_info di ON p.id = di.product_id 
+		INNER JOIN product_image pi ON p.id = pi.product_id
+		WHERE p.id = #{productId} AND pi.type = 1
+	</select>
 </mapper>
