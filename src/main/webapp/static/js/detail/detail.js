@@ -50,11 +50,6 @@ $(function(){
 
 	}
 	
-	$('.section_btn').on('click', function(){
-		window.location.href = '#/my-reservation';
-		console.log('click');
-	});
-	
 	// 상세정보, 오시는길
 	$('.info_tab_lst').on('click', 'li', function(e){
 		var itemIndex = $(e.currentTarget).index();

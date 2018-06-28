@@ -7,7 +7,7 @@
                 <tiles:insertAttribute name="title" />
                 <tiles:insertAttribute name="productInformation" />
                 <tiles:insertAttribute name="event" />   
-                <div class="section_btn"> <button type="button" class="bk_btn"> <i class="fn fn-nbooking-calender2"></i> <span>예매하기</span> </button> </div>
+                <div class="section_btn"><a href="/reservations?pid=${product.id }"> <button type="button" class="bk_btn"> <i class="fn fn-nbooking-calender2"></i> <span>예매하기</span> </button></a> </div>
 					
                 <div class="section_review_list">
                     <div class="review_box">
