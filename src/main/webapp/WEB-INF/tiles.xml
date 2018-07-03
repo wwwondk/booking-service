@@ -81,6 +81,7 @@
 		
 	<!-- Review List Page -->
 	<definition name="review" extends="base-definition">
+		<put-attribute name="header" value=""/>
 		<put-attribute name="content" value="review.content"/>
 		<put-attribute name="page-js" value="/WEB-INF/views/layout/page-js/review-js.jsp"/>
 	</definition>
