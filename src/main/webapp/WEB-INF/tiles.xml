@@ -88,6 +88,7 @@
 		
 	<!-- Review Write Page -->
 	<definition name="reviewWrite" extends="base-definition">
+		<put-attribute name="header" value=""/>
 		<put-attribute name="content" value="reviewWrite.content"/>
 		<put-attribute name="page-js" value="/WEB-INF/views/layout/page-js/reviewWrite-js.jsp"/>
 	</definition>	
