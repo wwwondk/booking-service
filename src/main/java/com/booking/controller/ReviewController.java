@@ -26,4 +26,10 @@ public class ReviewController {
 		model.addAttribute("comments", reviewDetailDto);
 		return "review";
 	}
+	
+	@GetMapping("/review-write")
+	public String reviewWrite(Model model, @RequestParam("pid") int productId){
+		int userId = 10;
+		return "reviewWrite";
+	}
 }
