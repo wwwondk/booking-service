@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.booking.dao.ReviewDao;
+import com.booking.dto.ReviewDetailDto;
 import com.booking.dto.ReviewDto;
 import com.booking.service.ReviewService;
 
@@ -28,6 +29,11 @@ public class ReviewServiceImpl implements ReviewService {
 		param.put("page", page);
 		param.put("limit", 3);
 		return reviewDao.selectProductReviewList(param);
+	}
+
+	@Override
+	public ReviewDetailDto selectReviewAvgCount(int productId) {
+		return reviewDao.selectReviewAvgCount(productId);
 	}
 
 }

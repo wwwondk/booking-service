@@ -16,6 +16,13 @@
 		WHERE ruc.product_id = #{productId}
 		GROUP BY ruc.id
 		ORDER BY ruc.create_date
-		LIMIT #{page}, #{limit};
+		LIMIT #{page}, #{limit}
+	</select>
+	
+	<select id="selectReviewAvgCount" parameterType="Integer" resultType="com.booking.dto.ReviewDetailDto">
+		SELECT AVG(score) as avg_score, COUNT(*) as review_count, product_id, p.name
+		FROM reservation_user_comment ruc
+		INNER JOIN product p ON ruc.product_id = p.id
+		WHERE product_id = #{id}
 	</select>
 </mapper>
