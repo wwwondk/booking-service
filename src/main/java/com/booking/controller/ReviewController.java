@@ -23,8 +23,7 @@ public class ReviewController {
 	public String reviews(Model model, @RequestParam("pid") int productId){
 		ReviewDetailDto reviewDetailDto = reviewService.selectReviewAvgCount(productId);
 		reviewDetailDto.setReviews(reviewService.selectProductReviewList(productId, 0, 10));
-		//model.addAttribute("product", reviewDetailDto);
-		model.addAttribute("product", reviewDetailDto);
+		model.addAttribute("comments", reviewDetailDto);
 		return "review";
 	}
 }

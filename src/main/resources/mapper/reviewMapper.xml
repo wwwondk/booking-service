@@ -20,7 +20,7 @@
 	</select>
 	
 	<select id="selectReviewAvgCount" parameterType="Integer" resultType="com.booking.dto.ReviewDetailDto">
-		SELECT AVG(score) as avg_score, COUNT(*) as review_count, product_id, p.name
+		SELECT AVG(score) as avg_score, COUNT(*) as review_count, product_id, p.name as product_name
 		FROM reservation_user_comment ruc
 		INNER JOIN product p ON ruc.product_id = p.id
 		WHERE product_id = #{id}

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 <ul class="list_short_review">
-<c:forEach var="ritem" items="${comments.reviews }">
+<c:forEach var="ritem" items="${product.reviews }">
 	<li class="list_item">
         <div>
             <div class="review_area">
@@ -13,7 +13,7 @@
            		</c:if>
                    </div>
 
-               	<h4 class="resoc_name">${comments.productName }</h4>
+               	<h4 class="resoc_name">${product.name }</h4>
                	<p class="review">${ritem.comment }</p>
             </div>
             <div class="info_area">

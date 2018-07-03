@@ -8,6 +8,6 @@ public @Data class ReviewDetailDto {
 	private int productId;
 	private float avgScore;
 	private int reviewCount;
-	private String name;
+	private String productName;
 	private List<ReviewDto> reviews;
 }
