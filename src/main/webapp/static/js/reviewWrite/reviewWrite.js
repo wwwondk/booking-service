@@ -31,9 +31,20 @@ $(function(){
 	
 	
 	// 리뷰폼
+	var limitTextLength = 400;
 	$('.review_write_info').on('click', function(){
 		$('.review_write_info').css('display', 'none');
 		$('.review_textarea').focus();
+	});
+	
+	$('.review_textarea').on('keyup', function(){
+		var len = $('.review_textarea').val().length;
+		if(len > limitTextLength){
+			alert(limitTextLength+' 자를 넘을 수 없습니다.');
+			$('.review_textarea').val($('.review_textarea').val().substr(0, limitTextLength));
+			len = limitTextLength;
+		}
+		$('.guide_review_len').text(len);
 	});
 	
 });

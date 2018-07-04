@@ -9,7 +9,7 @@
 		</label>
 		<input type="file" class="hidden_input" id="reviewImageFileOpenInput" accept="image/*" multiple>
 		<div class="guide_review">
-			<span>0</span>/400
+			<span class="guide_review_len">0</span>/400
 			<span>(최소5자이상)</span>
 		</div>
 	</div>
