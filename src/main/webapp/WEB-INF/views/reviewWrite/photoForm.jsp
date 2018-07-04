@@ -18,6 +18,7 @@
 	<div class="review_photos review_photos_write">
 		<div class="item_preview_thumbs">
 			<ul class="lst_thumb">
+				<!--
 				<li class="item">
 					<a href="#" class="anchor">
 						<span class="spr_book ico_del">삭제</span>
@@ -53,6 +54,7 @@
 					<img src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300" width="130" alt="" class="item_thumb">
 					<span class="img_border"></span>
 				</li>
+				-->
 			</ul>
 		</div>
 	</div>

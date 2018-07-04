@@ -56,13 +56,13 @@ $(function(){
 	///////////////////////////////////////////
 	
 	// jQuery
-	var file2 = $('#reviewImageFileOpenInput');
+	var file = $('#reviewImageFileOpenInput');
 	
 	var source = $('#photo-template').html();
 	var template = Handlebars.compile(source);
 	
-	file2.on('change', function(){
-		var fileList = file2.prop('files');
+	file.on('change', function(){
+		var fileList = file.prop('files');
 		var fileArray = Array.prototype.slice.call(fileList);
 		var fileIndex = 0;
 		
