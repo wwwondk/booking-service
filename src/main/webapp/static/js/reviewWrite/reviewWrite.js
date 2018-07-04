@@ -28,4 +28,12 @@ $(function(){
 		$('.star_rank ').text(starIndex);
 	
 	});
+	
+	
+	// 리뷰폼
+	$('.review_write_info').on('click', function(){
+		$('.review_write_info').css('display', 'none');
+		$('.review_textarea').focus();
+	});
+	
 });

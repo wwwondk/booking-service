@@ -3,7 +3,7 @@
 
 <div class="review_contents write">
 	<!-- [D] review_write_info 클릭 시 자신을 숨기고 review_textarea 에 focus를 보낸다. -->
-	<a href="#" class="review_write_info">
+	<a class="review_write_info">
 		<span class="middot">
 			실 사용자의 리뷰는 상품명의 더 나은 서비스 제공과 다른 사용자들의 선택에 큰 도움이 됩니다.
 		</span><br>
