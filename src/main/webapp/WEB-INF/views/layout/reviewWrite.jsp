@@ -23,4 +23,5 @@
 		</div>
 		<!-- //리뷰 등록 -->
 	</div>
+	<tiles:insertAttribute name="photo-list-template" />
 </div>

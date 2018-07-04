@@ -46,6 +46,7 @@
 		<put-attribute name="starpoint" value="/WEB-INF/views/reviewWrite/starpoint.jsp" />
 		<put-attribute name="reviewForm" value="/WEB-INF/views/reviewWrite/reviewForm.jsp" />
 		<put-attribute name="photoForm" value="/WEB-INF/views/reviewWrite/photoForm.jsp" />
+		<put-attribute name="photo-list-template" value="/WEB-INF/views/reviewWrite/photo-list-template.jsp"/>
 	</definition>
 	
 	<!-- Review List Page Content -->

@@ -47,4 +47,40 @@ $(function(){
 		$('.guide_review_len').text(len);
 	});
 	
+	// 포토
+	$('ul.lst_thumb').on('click', '.anchor', function(e){
+		var photoItem = $(e.currentTarget).parent();
+		$(e.currentTarget).parent().remove();
+	});
+	
+	///////////////////////////////////////////
+	
+	// jQuery
+	var file2 = $('#reviewImageFileOpenInput');
+	
+	var source = $('#photo-template').html();
+	var template = Handlebars.compile(source);
+	
+	file2.on('change', function(){
+		var fileList = file2.prop('files');
+		var fileArray = Array.prototype.slice.call(fileList);
+		var fileIndex = 0;
+		
+		fileArray.forEach(function(f){
+			if(!f.type.match('image.*')){
+				alert('이미지 파일만 업로드 가능합니다.');
+				return;
+			}
+			
+			var reader = new FileReader();
+			reader.readAsDataURL(f);
+			reader.onload = function(){
+				var Photo = {'filePath' : reader.result}
+				$(".lst_thumb").append(template({photos: Photo}));
+				fileIndex++;
+			}
+		});
+		
+	});
+	
 });
