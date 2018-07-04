@@ -20,8 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public class ReviewRestController {
 
 	@PostMapping("/comments")
-	public void insertReview(@RequestParam int starPoint, @RequestParam String comment, @RequestParam MultipartFile[] files,
-			HttpServletRequest request) {
+	public void insertReview(@RequestParam int starPoint, @RequestParam String comment,	HttpServletRequest request) {
 		
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
 		System.out.println(multipartHttpServletRequest);
@@ -33,8 +32,8 @@ public class ReviewRestController {
     	String formattedDate = rootPath + new SimpleDateFormat("yyyy" + File.separator + "MM" + File.separator + "dd").format(new Date());
 
         File f = new File(formattedDate);
-        if(!f.exists()){ // 파일이 존재하지 않는다면
-            f.mkdirs(); // 해당 디렉토리를 만든다. 하위폴더까지 한꺼번에 만든다.
+        if(!f.exists()){ // 파일이 존재하지 않는다면 하위폴더까지 만든다.
+            f.mkdirs();
         }
 		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
 		MultipartFile multipartFile = null;
@@ -58,8 +57,8 @@ public class ReviewRestController {
                 System.out.println("saveFileName : " + saveFileName);
                 
                 try(
-                        InputStream in = multipartFile.getInputStream();
-                        FileOutputStream fos = new FileOutputStream(saveFileName)){
+                    InputStream in = multipartFile.getInputStream();
+                    FileOutputStream fos = new FileOutputStream(saveFileName)){
                     int readCount = 0;
                     byte[] buffer = new byte[512];
                     while((readCount = in.read(buffer)) != -1){
