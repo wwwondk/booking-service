@@ -27,8 +27,8 @@ public class ReviewController {
 		return "review";
 	}
 	
-	@GetMapping("/review-write")
-	public String reviewWrite(Model model, @RequestParam("pid") int productId){
+	@GetMapping("/reviews/write")
+	public String reviewWrite(Model model, @RequestParam("rid") int reservationId){
 		int userId = 10;
 		return "reviewWrite";
 	}
