@@ -53,13 +53,12 @@ $(function(){
 		$(e.currentTarget).parent().remove();
 	});
 	
-	///////////////////////////////////////////
-	
-	// jQuery
 	var file = $('#reviewImageFileOpenInput');
 	
 	var source = $('#photo-template').html();
 	var template = Handlebars.compile(source);
+	
+	var tempFileList = [];
 	
 	file.on('change', function(){
 		var fileList = file.prop('files');
@@ -71,7 +70,7 @@ $(function(){
 				alert('이미지 파일만 업로드 가능합니다.');
 				return;
 			}
-			
+			tempFileList.push(f);
 			var reader = new FileReader();
 			reader.readAsDataURL(f);
 			reader.onload = function(){
@@ -81,6 +80,50 @@ $(function(){
 			}
 		});
 		
+	});
+	
+	// 리뷰 등록 버튼
+	//$('.box_bk_btn').on('click', function(e){
+	$('#reviewForm').on('submit', function(e){
+		e.preventDefault();
+		console.log('리뷰클릭!');
+		console.log($('#reviewForm').serializeArray());
+//		var review = new Object();
+//		review.starPoint = starIndex;
+//		review.comment = $('.review_textarea').val();
+//		review.files = tempFileList;
+		//var formData = new FormData($('#reviewForm'));
+		//formData.append('starPoint', starIndex);
+		//formData.append('comment', $('.review_textarea').val());
+		//formData.append('starPoint', 3);
+		//formData.append('comment', 'abced');
+		//formData.append('fi', tempFileList);
+		//formData.append('files', review.files);
+		
+
+		var formData = new FormData();
+		formData.append('starPoint', 3);
+		formData.append('comment', 'abced');
+
+
+		//formData.append("files", $("#soloFile")[0].files[0]); // 파일 한개
+
+		// file multiple 전송시 다음과 같이 반복문으로 추가한다. //파일 여러개
+
+		$($("#reviewImageFileOpenInput")[0].files).each(function(index, f) {
+
+			formData.append("multi_file[]", f);
+
+		});
+
+
+
+		
+		
+		var reqObject = new XMLHttpRequest();
+		reqObject.open('post', '/comments', true);
+		reqObject.send(formData);
+		console.log(formData);
 	});
 	
 });
