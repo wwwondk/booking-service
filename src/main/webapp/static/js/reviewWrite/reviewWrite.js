@@ -83,7 +83,6 @@ $(function(){
 	});
 	
 	// 리뷰 등록 버튼
-	//$('.box_bk_btn').on('click', function(e){
 	$('#reviewForm').on('submit', function(e){
 		e.preventDefault();
 
