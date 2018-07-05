@@ -22,6 +22,8 @@
 			<div class="box_bk_btn">
 				<button class="bk_btn"><span class="btn_txt">리뷰 등록</span></button>
 			</div>
+			<input type="hidden" name="reservationId" value="${reservationId }"/>
+			<input type="hidden" name="productId" value="${productId }"/>
 		</form>
 	</div>
 	<tiles:insertAttribute name="photo-list-template" />
