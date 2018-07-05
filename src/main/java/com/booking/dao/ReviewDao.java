@@ -13,4 +13,6 @@ public interface ReviewDao {
 	public String selectName(int reservationId);
 	public List<ReviewDto> selectProductReviewList(Map<String, Object> param);
 	public ReviewDetailDto selectReviewAvgCount(int productId);
+	public Integer insertReview(Map<String, Object> param);
+	public Integer insertReviewImage(Map<String, Object> param);
 }

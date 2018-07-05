@@ -26,4 +26,8 @@
 		WHERE product_id = #{productId} AND (type = 4)
 	</select>
 
+	<insert id="insertImage" parameterType="com.booking.dto.FileDto" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO file(user_id, file_name, save_file_name, file_length, content_type, delete_flag, create_date, modify_date)
+		VALUES (#{userId}, #{fileName}, #{saveFileName}, #{fileLength}, #{contentType}, 0, SYSDATE(), SYSDATE())		
+	</insert>
 </mapper>
