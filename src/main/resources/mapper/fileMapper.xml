@@ -27,7 +27,7 @@
 	</select>
 
 	<insert id="insertImage" parameterType="com.booking.dto.FileDto">
-		INSERT INTO file(user_id, file_name, save_file_name, file_length, content_type, delete_flag, create_date, modify_date)
+		INSERT INTO file(user_i, file_name, save_file_name, file_length, content_type, delete_flag, create_date, modify_date)
 		VALUES (#{userId}, #{fileName}, #{saveFileName}, #{fileLength}, #{contentType}, 0, SYSDATE(), SYSDATE())
 		<selectKey resultType="int" keyProperty="id" order="AFTER">
 			SELECT LAST_INSERT_ID()

@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.booking.dao.FileDao;
@@ -50,6 +52,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Integer> uploadFile(MultipartFile[] files, HttpServletRequest request) {
 
 		String rootPath = request.getSession().getServletContext().getRealPath("/");      	
@@ -81,9 +84,9 @@ public class FileServiceImpl implements FileService {
             int USER_ID = 2;			//수정하기
             contentType = "한줄평이미지"; 	//수정하기
  
-            try(
+            try{
                 InputStream in = multipartFile.getInputStream();
-                FileOutputStream fos = new FileOutputStream(saveFileName)){
+                FileOutputStream fos = new FileOutputStream(saveFileName);
                 int readCount = 0;
                 byte[] buffer = new byte[512];
                 while((readCount = in.read(buffer)) != -1){

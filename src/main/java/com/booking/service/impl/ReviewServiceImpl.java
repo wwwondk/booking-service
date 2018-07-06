@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,11 +44,11 @@ public class ReviewServiceImpl implements ReviewService {
 	public ReviewDetailDto selectReviewAvgCount(int productId) {
 		return reviewDao.selectReviewAvgCount(productId);
 	}
-
+	
 	@Override
-	@Transactional
+	@Transactional(rollbackFor={Exception.class})
 	public void insertReview(int starPoint, String comment, MultipartFile[] reviewFile, HttpServletRequest request) {
-		
+
 		// 트랜잭션처리
 		int productId = 1;	// 수정하기
 		int userId = 2;	// 수정하기
@@ -59,7 +60,7 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		reviewDao.insertReview(reviewWriteDto);
 		int reservationUserCommentId = reviewWriteDto.getId();
-
+		System.out.println("reservationUserCommentId : " + reservationUserCommentId);
 		if(reviewFile.length > 0){
 			List<Integer> fileIdList = fileService.uploadFile(reviewFile, request);
 
