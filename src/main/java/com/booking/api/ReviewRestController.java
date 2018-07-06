@@ -23,8 +23,6 @@ public class ReviewRestController {
 	@PostMapping("/comments")
 	public void insertReview(@RequestParam int starPoint, @RequestParam String comment,	
 			@RequestParam MultipartFile[] reviewFile, HttpServletRequest request) {
-	
-		System.out.println("[Controller] starPoint: " + starPoint+ " / comment : " + comment+" / reviewFile : "+reviewFile.length);
 
 		reviewService.insertReview(starPoint, comment, reviewFile, request);
 		

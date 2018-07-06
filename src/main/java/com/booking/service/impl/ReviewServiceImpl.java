@@ -49,7 +49,6 @@ public class ReviewServiceImpl implements ReviewService {
 	@Transactional(rollbackFor={Exception.class})
 	public void insertReview(int starPoint, String comment, MultipartFile[] reviewFile, HttpServletRequest request) {
 
-		// 트랜잭션처리
 		int productId = 1;	// 수정하기
 		int userId = 2;	// 수정하기
 		ReviewWriteDto reviewWriteDto = new ReviewWriteDto();
@@ -60,7 +59,7 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		reviewDao.insertReview(reviewWriteDto);
 		int reservationUserCommentId = reviewWriteDto.getId();
-		System.out.println("reservationUserCommentId : " + reservationUserCommentId);
+		
 		if(reviewFile.length > 0){
 			List<Integer> fileIdList = fileService.uploadFile(reviewFile, request);
 

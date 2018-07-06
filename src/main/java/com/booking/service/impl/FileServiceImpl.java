@@ -54,11 +54,10 @@ public class FileServiceImpl implements FileService {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Integer> uploadFile(MultipartFile[] files, HttpServletRequest request) {
+   	
+    	String path = "\\uploadImg\\" + new SimpleDateFormat("yyyy" + File.separator + "MM" + File.separator + "dd").format(new Date());
 
-		String rootPath = request.getSession().getServletContext().getRealPath("/");      	
-    	String formattedDate = rootPath + new SimpleDateFormat("yyyy" + File.separator + "MM" + File.separator + "dd").format(new Date());
-
-        File f = new File(formattedDate);
+        File f = new File(path);
         if(!f.exists()){ // 파일이 존재하지 않는다면 하위폴더까지 만든다.
             f.mkdirs();
         }
@@ -79,7 +78,7 @@ public class FileServiceImpl implements FileService {
             long size = multipartFile.getSize();
             
             String uuid = UUID.randomUUID().toString();
-            String saveFileName = formattedDate + File.separator + uuid; // 저장 절대 경로
+            String saveFileName = path + File.separator + uuid; // 저장 절대 경로
 			
             int USER_ID = 2;			//수정하기
             contentType = "한줄평이미지"; 	//수정하기
@@ -106,6 +105,7 @@ public class FileServiceImpl implements FileService {
                 
             }catch(Exception ex){
                 ex.printStackTrace();
+                throw new RuntimeException(ex);
             }
 		}
 		return result;
