@@ -26,5 +26,8 @@
 		sns_profile = #{snsProfile},
 		modify_date = SYSDATE()
 		WHERE id = #{id}
+		<selectKey resultType="com.booking.dto.User" order="AFTER">
+			SELECT SELECT LAST_INSERT_ID()
+		</selectKey>
 	</update>
 </mapper>
