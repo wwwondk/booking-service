@@ -1,29 +1,32 @@
 package com.booking.api;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.booking.service.ReviewService;
+
 @RestController
 public class ReviewRestController {
+	
+	private ReviewService reviewService;
+	
+	@Autowired
+	public ReviewRestController(ReviewService reviewService) {
+		this.reviewService = reviewService;
+	}
 
 	@PostMapping("/comments")
 	public void insertReview(@RequestParam int starPoint, @RequestParam String comment,	
 			@RequestParam MultipartFile[] reviewFile, HttpServletRequest request) {
 	
+		System.out.println("starPoint: " + starPoint+ " / comment : " + comment+" / reviewFile : "+reviewFile.length);
 
-		System.out.println("starPoint: " + starPoint);
-		System.out.println("comment : " + comment);
+		reviewService.insertReview(starPoint, comment, reviewFile, request);
 
 		/*
 		String rootPath = request.getSession().getServletContext().getRealPath("/");      	

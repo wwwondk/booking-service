@@ -17,7 +17,7 @@ public class MyReservationController {
 	
 	@GetMapping("/my-reservation")
 	public String myReservation(Model model){
-		int userId = 10;
+		int userId = 2;
 		model.addAttribute("reservationList", myReservationService.selectAll(userId));
 		model.addAttribute("summary", myReservationService.selectReservationTypeCount(userId));
 		return "myreservation";

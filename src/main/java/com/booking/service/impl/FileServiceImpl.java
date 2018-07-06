@@ -72,18 +72,13 @@ public class FileServiceImpl implements FileService {
 			multipartFile = files[i];
 
 			String contentType = multipartFile.getContentType();
-            String name = multipartFile.getName();
             String originalFilename = multipartFile.getOriginalFilename();
             long size = multipartFile.getSize();
             
             String uuid = UUID.randomUUID().toString();
             String saveFileName = formattedDate + File.separator + uuid; // 저장 절대 경로
 			
-            System.out.println("name :" + name);
-            System.out.println("originalFilename : " + originalFilename);
-            System.out.println("saveFileName : " + saveFileName);
-
-            int USER_ID = 10;			//수정하기
+            int USER_ID = 2;			//수정하기
             contentType = "한줄평이미지"; 	//수정하기
  
             try(
@@ -96,13 +91,15 @@ public class FileServiceImpl implements FileService {
                 }
                 
                 FileDto fileDto = new FileDto();
-                fileDto.setUser_id(USER_ID);
+                fileDto.setUserId(USER_ID);
                 fileDto.setFileName(originalFilename);
                 fileDto.setSaveFileName(saveFileName);
                 fileDto.setFileLength((int)size);
                 fileDto.setContentType(contentType);
                 
-                result.add(fileDao.insertImage(fileDto));
+                fileDao.insertImage(fileDto);
+                int fileId = fileDto.getId();
+                result.add(fileId);
                 
             }catch(Exception ex){
                 ex.printStackTrace();

@@ -6,7 +6,7 @@ import lombok.Data;
 
 public @Data class FileDto {
 	private int id;
-	private int user_id;
+	private int userId;
 	private String fileName;
 	private String saveFileName;
 	private int fileLength;

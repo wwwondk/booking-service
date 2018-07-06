@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.booking.dao.ReviewDao;
@@ -44,18 +45,20 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
+	@Transactional
 	public void insertReview(int starPoint, String comment, MultipartFile[] reviewFile, HttpServletRequest request) {
 		
 		// 트랜잭션처리
 		int productId = 1;	// 수정하기
-		int userId = 10;	// 수정하기
+		int userId = 2;	// 수정하기
 		ReviewWriteDto reviewWriteDto = new ReviewWriteDto();
 		reviewWriteDto.setProductId(productId);
 		reviewWriteDto.setUserId(userId);
 		reviewWriteDto.setScore((float)starPoint);
 		reviewWriteDto.setComment(comment);
 		
-		int reservationUserCommentId = reviewDao.insertReview(reviewWriteDto);
+		reviewDao.insertReview(reviewWriteDto);
+		int reservationUserCommentId = reviewWriteDto.getId();
 
 		if(reviewFile.length > 0){
 			List<Integer> fileIdList = fileService.uploadFile(reviewFile, request);
