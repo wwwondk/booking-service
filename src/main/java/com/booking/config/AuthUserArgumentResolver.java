@@ -10,7 +10,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import com.booking.dto.UserDto;
+import com.booking.dto.User;
 
 public class AuthUserArgumentResolver implements HandlerMethodArgumentResolver {
 
@@ -31,7 +31,7 @@ public class AuthUserArgumentResolver implements HandlerMethodArgumentResolver {
         }
         HttpServletRequest request = (HttpServletRequest) nativeWebRequest.getNativeRequest();
         HttpSession session = request.getSession();
-        UserDto user = (UserDto) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
         return user;
     }
 }

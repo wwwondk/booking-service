@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.booking.dao.UserDao">
+	<select id="selectByEmail" parameterType="String" resultType="com.booking.dto.User">
+		SELECT * FROM users WHERE email = #{email}
+	</select>
+	
+	<insert id="create" parameterType="com.booking.dto.User">
+		INSERT INTO users(username, email, tel, nickname, sns_id, sns_type, sns_profile, admin_flag, create_date, modify_date)
+		VALUES (#{userName}, #{email}, #{tel}, #{nickname}, #{sns_id}, #{sns_type}, #{sns_profile}, 0, SYSDATE(), SYSDATE())
+		<selectKey resultType="com.booking.dto.User" order="AFTER">
+			SELECT SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="update" parameterType="com.booking.dto.User">
+	</update>
+</mapper>
