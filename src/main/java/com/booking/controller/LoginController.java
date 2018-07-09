@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -30,6 +31,7 @@ import net.minidev.json.JSONObject;
 
 @Controller
 @RequestMapping("/login")
+@PropertySource("classpath:/auth.properties")
 public class LoginController {
 	@Value("${naver.login.client.id.query}")
 	private String clientIdQuery;
@@ -71,8 +73,7 @@ public class LoginController {
 			e.printStackTrace();
 		}
 		try {
-			response.sendRedirect(
-			naverOauthAuthorizeUrl + clientIdQuery + "&redirect_uri=" + redirectUri + "&state=" + state);
+			response.sendRedirect(naverOauthAuthorizeUrl +"?client_id="+ clientIdQuery + "&redirect_uri=" + redirectUri + "&state=" + state+"&response_type=code");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -128,7 +129,8 @@ public class LoginController {
 	}
 
 	private JSONObject getNaverOauthToken(String state, String code) {
-		String url = naverOauthTokenUrl + clientIdQuery + clientSecretQuery + "&state=" + state + "&code=" + code;
+		String url = naverOauthTokenUrl +"?client_id="+ clientIdQuery +"&client_secret="+ clientSecretQuery 
+					+ "&state=" + state + "&code=" + code +"&grant_type=authorization_code";
 		return restOperations.getForObject(url, JSONObject.class);
 	}
 
