@@ -29,7 +29,6 @@ public class ReviewController {
 	
 	@GetMapping("/reviews/write")
 	public String reviewWrite(Model model, @RequestParam("rid") int reservationId, @RequestParam("pid") int productId, @RequestParam("pname") String productName){
-		int userId = 2;
 		model.addAttribute("reservationId", reservationId);
 		model.addAttribute("productId", productId);
 		model.addAttribute("productName", productName);

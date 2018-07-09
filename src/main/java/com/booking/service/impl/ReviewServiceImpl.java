@@ -12,10 +12,12 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.booking.config.AuthUser;
 import com.booking.dao.ReviewDao;
 import com.booking.dto.ReviewDetailDto;
 import com.booking.dto.ReviewDto;
 import com.booking.dto.ReviewWriteDto;
+import com.booking.dto.User;
 import com.booking.service.FileService;
 import com.booking.service.ReviewService;
 
@@ -47,10 +49,8 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	@Override
 	@Transactional(rollbackFor={Exception.class})
-	public void insertReview(int starPoint, String comment, MultipartFile[] reviewFile, HttpServletRequest request) {
+	public void insertReview(int starPoint, String comment, MultipartFile[] reviewFile, HttpServletRequest request, int userId, int productId, int reservationId) {
 
-		int productId = 1;	// 수정하기
-		int userId = 2;	// 수정하기
 		ReviewWriteDto reviewWriteDto = new ReviewWriteDto();
 		reviewWriteDto.setProductId(productId);
 		reviewWriteDto.setUserId(userId);
@@ -61,7 +61,7 @@ public class ReviewServiceImpl implements ReviewService {
 		int reservationUserCommentId = reviewWriteDto.getId();
 		
 		if(reviewFile.length > 0){
-			List<Integer> fileIdList = fileService.uploadFile(reviewFile, request);
+			List<Integer> fileIdList = fileService.uploadFile(reviewFile, request, userId);
 
 			HashMap<String, Object> param = new HashMap<>();
 			param.put("reservationUserCommentId", reservationUserCommentId);

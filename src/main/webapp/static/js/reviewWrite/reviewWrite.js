@@ -89,6 +89,8 @@ $(function(){
 		var formData = new FormData();
 		formData.append('starPoint', starIndex);
 		formData.append('comment', $('.review_textarea').val());
+		formData.append('reservationId', $('#reservationId').val());
+		formData.append('productId', $('#productId').val());
 
 		$($("#reviewImageFileOpenInput")[0].files).each(function(index, f) {
 			formData.append("reviewFile", f);

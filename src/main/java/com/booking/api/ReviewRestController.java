@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.booking.config.AuthUser;
+import com.booking.dto.User;
 import com.booking.service.ReviewService;
 
 @RestController
@@ -21,10 +23,11 @@ public class ReviewRestController {
 	}
 
 	@PostMapping("/comments")
-	public void insertReview(@RequestParam int starPoint, @RequestParam String comment,	
-			@RequestParam MultipartFile[] reviewFile, HttpServletRequest request) {
+	public void insertReview(@RequestParam int starPoint, @RequestParam String comment,	@RequestParam int productId, @RequestParam int reservationId,
+			@RequestParam MultipartFile[] reviewFile, HttpServletRequest request, @AuthUser User user) {
 
-		reviewService.insertReview(starPoint, comment, reviewFile, request);
+		int userId = user.getId();
+		reviewService.insertReview(starPoint, comment, reviewFile, request, userId, productId, reservationId);
 		
 	}
 	

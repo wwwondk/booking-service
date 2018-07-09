@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.booking.config.AuthUser;
+import com.booking.dto.User;
 import com.booking.service.MyReservationService;
 
 @Controller
@@ -16,8 +18,8 @@ public class MyReservationController {
 	}
 	
 	@GetMapping("/my-reservation")
-	public String myReservation(Model model){
-		int userId = 2;
+	public String myReservation(Model model, @AuthUser User user){
+		int userId = user.getId();
 		model.addAttribute("reservationList", myReservationService.selectAll(userId));
 		model.addAttribute("summary", myReservationService.selectReservationTypeCount(userId));
 		return "myreservation";

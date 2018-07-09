@@ -7,9 +7,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.booking.config.AuthUser;
 import com.booking.dao.MyReservationDao;
 import com.booking.dto.MyReservationDto;
 import com.booking.dto.ReservationTypeDto;
+import com.booking.dto.User;
 import com.booking.service.MyReservationService;
 
 @Service

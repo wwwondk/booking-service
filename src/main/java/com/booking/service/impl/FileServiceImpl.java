@@ -17,8 +17,10 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.booking.config.AuthUser;
 import com.booking.dao.FileDao;
 import com.booking.dto.FileDto;
+import com.booking.dto.User;
 import com.booking.service.FileService;
 
 @Service
@@ -53,7 +55,7 @@ public class FileServiceImpl implements FileService {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public List<Integer> uploadFile(MultipartFile[] files, HttpServletRequest request) {
+	public List<Integer> uploadFile(MultipartFile[] files, HttpServletRequest request, int userId) {
    	
     	String path = "\\uploadImg\\" + new SimpleDateFormat("yyyy" + File.separator + "MM" + File.separator + "dd").format(new Date());
 
@@ -80,7 +82,6 @@ public class FileServiceImpl implements FileService {
             String uuid = UUID.randomUUID().toString();
             String saveFileName = path + File.separator + uuid; // 저장 절대 경로
 			
-            int USER_ID = 2;			//수정하기
             contentType = "한줄평이미지"; 	//수정하기
  
             try{
@@ -93,7 +94,7 @@ public class FileServiceImpl implements FileService {
                 }
                 
                 FileDto fileDto = new FileDto();
-                fileDto.setUserId(USER_ID);
+                fileDto.setUserId(userId);
                 fileDto.setFileName(originalFilename);
                 fileDto.setSaveFileName(saveFileName);
                 fileDto.setFileLength((int)size);

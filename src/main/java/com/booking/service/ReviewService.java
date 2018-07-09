@@ -12,6 +12,6 @@ import com.booking.dto.ReviewDto;
 public interface ReviewService {
 	public List<ReviewDto> selectProductReviewList(int productId, int page, int limits);
 	public ReviewDetailDto selectReviewAvgCount(int productId);
-	public void insertReview(int starPoint, String comment, MultipartFile[] reviewFile, HttpServletRequest request);
+	public void insertReview(int starPoint, String comment, MultipartFile[] reviewFile, HttpServletRequest request, int userId, int productId, int reservationId);
 	
 }
