@@ -3,39 +3,61 @@ console.log('RESERVE JS');
 $(function(){
 	
 	$('.header').attr('display', 'none');
-	
-	//var ticket = $('.qty');
-	//console.log(ticket);
-	function Ticket(){
-		var count;
-		function init(){
+
+	class Ticket {
+		constructor(id){
+			this.id = id;
 			this.count = 0;
-			bindEvents();
-			console.log(this);
+			this.btnMinus = $(id).find('.ico_minus3');
+			this.btnPlus = $(id).find('.ico_plus3');
+			this.countInput = $(id).find('.count_control_input');
+			this.priceInput = $(id).find('.total_price');
+			this.price = parseInt($(id).find('.price').text().replace(',', ''));
+
+			this.bindEvents();
 		}
-		function bindEvents(){
-			$('.ico_minus3').on('click', minus);
+		bindEvents(){
+			this.btnMinus.on('click', this.clickMinus.bind(this));
+			this.btnPlus.on('click', this.clickPlus.bind(this));
 		}
-		function plus(){
-			console.log('plus!');
-			return ++count;
+		clickPlus(){
+			this.count++;
+			this.changeCountInput();
+			this.changePrice();
+			if(this.count > 0){
+				$(this.id).find('.individual_price').addClass('on_color');
+				this.btnMinus.removeClass('disabled');
+				this.countInput.removeClass('disabled');
+			}
 		}
-		function minus(){
-			console.log('minus!');
-			return --count;
+		clickMinus(){
+			if(this.count <= 0)
+				return;
+			this.count--;
+			this.changeCountInput();
+			this.changePrice();
+			if(this.count <= 0){
+				$(this.id).find('.individual_price').removeClass('on_color');
+				this.btnMinus.addClass('disabled');
+				this.countInput.addClass('disabled');
+			}
 		}
-		return {
-			init : init
+		changeCountInput(){
+			this.countInput.val(this.count);
+		}
+		changePrice(){
+			var p = this.price * this.count;
+			// 3자리마다 콤마찍기
+			p = p.toString().replace(/(\d)(?=(?:\d{3})+(?!\d))/g,'$1,');
+			this.priceInput.text(p);
 		}
 	}
 	
-	
 	var tickets = [];
     $(".qty").each(function (i, e) {
-    	var v = new Ticket('#' + $(e).attr('id'));
-        tickets.push(v);
-        v.init();
+        tickets.push(new Ticket('#' + $(e).attr('id')));
     });
+    
 	
 });
 
