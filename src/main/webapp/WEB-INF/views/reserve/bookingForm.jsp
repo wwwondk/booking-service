@@ -9,13 +9,13 @@
             <div class="agreement_nessasary help_txt"> <span class="spr_book ico_nessasary"></span> <span>필수입력</span> </div>
             <form class="form_horizontal">
                 <div class="inline_form"> <label class="label" for="name"> <span class="spr_book ico_nessasary">필수</span> <span>예매자</span> </label>
-                    <div class="inline_control"> <input type="text" name="name" id="name" class="text" value="네이버" maxlength="17"> </div>
+                    <div class="inline_control"> <input type="text" name="name" id="name" class="text" value="${null eq user.username ? '네이버' : user.username}" maxlength="17"> </div>
                 </div>
                 <div class="inline_form"> <label class="label" for="tel"> <span class="spr_book ico_nessasary">필수</span> <span>연락처</span> </label>
-                    <div class="inline_control"> <input type="tel" name="tel" id="tel" class="tel" value="01012345678" placeholder="휴대폰 입력 시 예매내역 문자발송"> </div>
+                    <div class="inline_control"> <input type="tel" name="tel" id="tel" class="tel" value="${user.tel}" placeholder="휴대폰 입력 시 예매내역 문자발송"> </div>
                 </div>
                 <div class="inline_form"> <label class="label" for="email">  <span>이메일</span> </label>
-                    <div class="inline_control"> <input type="email" name="email" id="email" class="email" value="navercorp@naver.com" maxlength="50"> </div>
+                    <div class="inline_control"> <input type="email" name="email" id="email" class="email" value="${user.email}" maxlength="50"> </div>
                 </div>
                 <div class="inline_form last"> <label class="label" for="message">예매내용</label>
                     <div class="inline_control">
@@ -27,7 +27,7 @@
         </div>
     </div>
     <div class="section_booking_agreement">
-        <div class="agreement all"> <input type="checkbox" id="chk3" class="chk_agree"> <label for="chk3" class="label chk_txt_label"> <span>이용자 약관 전체동의</span> </label>
+        <div class="agreement all"> <input type="checkbox" class="chk_agree" id="checkagree">  <label for="checkagree" class="label chk_txt_label"> <span>이용자 약관 전체동의</span> </label>
             <div class="agreement_nessasary">
                 <span>필수동의</span> </div>
         </div>
