@@ -52,7 +52,7 @@ $(function(){
 			var id = this.rid;
 			$.ajax({
 				method:'delete',
-				url :'/api/booking/'+id,
+				url :'/appointments/'+id,
 				success : function(res){
 					alert('예약번호 \''+id+'\' 취소 되었습니다.');
 					location.href = '/my-reservation';

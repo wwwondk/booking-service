@@ -19,7 +19,7 @@
                 </div>
                 <div class="inline_form last"> <label class="label" for="message">예매내용</label>
                     <div class="inline_control">
-                        <p class="inline_txt selected"><fmt:formatDate value="${product.displayStart }" pattern="yyyy.MM.dd.(E)"/>~<fmt:formatDate value="${product.displayEnd }" pattern="yyyy.MM.dd.(E)"/>,<br/> 
+                        <p class="inline_txt selected"><span id="reservation_date"><fmt:formatDate value="${product.displayStart }" pattern="yyyy.MM.dd.(E)"/>~<fmt:formatDate value="${product.displayEnd }" pattern="yyyy.MM.dd.(E)"/></span>,<br/> 
                         	총 <span id="booking_ticket_count">0</span> 매</p>
                     </div>
                 </div>

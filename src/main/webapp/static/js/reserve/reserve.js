@@ -7,6 +7,7 @@ $(function(){
 		constructor(id){
 			this.id = id;
 			this.count = 0;
+			this.priceType = $(id).data('price-type');
 			this.btnMinus = $(id).find('.ico_minus3');
 			this.btnPlus = $(id).find('.ico_plus3');
 			this.countInput = $(id).find('.count_control_input');
@@ -164,21 +165,29 @@ $(function(){
 
     		var obj = {};
     		obj.productId=$('.ct').data('product-id');
-    		obj.generalTicketCount=ticketArray[0].count;
-    		obj.youthTicketCount=ticketArray[1].count;
-    		obj.childTicketCount=ticketArray[2].count;
-    		obj.reservationName=$('#name').val();
-    		obj.reservationEmail=$('#email').val();
-    		obj.reservationTel=$('#tel').val();
-    		obj.reservationDate= $('#reservation_date').text();
-    		obj.reservationType= 1;
+    		
+    		$.each(ticketArray, function(i, v){
+    			if(v.priceType === 1){
+    				obj.generalTicketCount = v.count;
+    			}else if(v.priceType === 2){
+    				obj.youthTicketCount = v.count;
+    			}else if(v.priceType === 3){
+    				obj.childTicketCount = v.count;
+    			}
+    		})
+    		
+    		obj.reservationName = $('#name').val();
+    		obj.reservationEmail = $('#email').val();
+    		obj.reservationTel = $('#tel').val();
+    		obj.reservationDate = $('#reservation_date').text();
+    		obj.reservationType = 1;
     		obj.totalPrice=ticketArray.reduce((a, v) => a + parseInt(v.totalPrice), 0);
-
+    		
             $.ajax({
                 method: 'post',
                 data: JSON.stringify(obj),
                 contentType: 'application/json;charset=utf-8',
-                url: '/api/booking',
+                url: '/appointments',
                 success: response => {
                     if (response != 0) {
                     	alert('예약완료되었습니다.\n예약번호 : '+response);
