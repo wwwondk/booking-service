@@ -11,7 +11,7 @@ public @Data class ReservationDto {
 	private int generalTicketCount;
 	private int youthTicketCount;
 	private int childTicketCount;
-	private String reservtionName;
+	private String reservationName;
 	private String reservationTel;
 	private String reservationEmail;
 	private String reservationDate;

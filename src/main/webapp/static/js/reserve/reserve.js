@@ -4,7 +4,7 @@ $(function(){
 	
 	$('.header').attr('display', 'none');
 	$('a.btn_back').on('click', () => history.back());
-
+	
 	class Ticket {
 		constructor(id){
 			this.id = id;
@@ -14,7 +14,7 @@ $(function(){
 			this.countInput = $(id).find('.count_control_input');
 			this.priceInput = $(id).find('.total_price');
 			this.price = parseInt($(id).find('.price').text().replace(',', ''));
-
+			this.totalPrice = 0;
 			this.bindEvents();
 		}
 		bindEvents(){
@@ -50,6 +50,7 @@ $(function(){
 		}
 		changePrice(){
 			var p = this.price * this.count;
+			this.totalPrice = p;
 			// 3자리마다 콤마찍기
 			p = p.toString().replace(/(\d)(?=(?:\d{3})+(?!\d))/g,'$1,');
 			this.priceInput.text(p);
@@ -72,11 +73,11 @@ $(function(){
     	};
     	var totalCount = 0;
     	var tickets;
+    	var ticketArray;
     	
     	function init(tickets){
-    		console.log('init')
-    		console.log(this);
     		this.tickets = tickets;
+    		ticketArray = tickets;
     		bindEvents(this.tickets);
             checkName.apply($('#name').get(0));
             checkTel.apply($('#tel').get(0));
@@ -91,7 +92,7 @@ $(function(){
     	    $('#checkagree').on('click', checkAgreement);
             $('a.btn_agreement').on('click', toggleOpen);
             $('button.bk_btn').on('click', checkButton);
-            $('#booking_ticket_count').on('change', {tickets:this.tickets}, changeTotalCount);
+            $('#booking_ticket_count').on('change', {tickets:tickets}, changeTotalCount);
     	}
     	
     	function changeTotalCount(e) {
@@ -162,36 +163,37 @@ $(function(){
         }
     	
     	function makeReservation() {
-            var obj = {
-                productId: $('.ct').data('product-id'),
-                generalTicketCount: ticketArray[0].count,
-                youthTicketCount: ticketArray[1].count,
-                childTicketCount: ticketArray[2].count,
-                reservationName: $('#name').val(),
-                reservationEmail: $('#email').val(),
-                reservationTel: $('#tel').val(),
-                reservationDate: $('#reservation_date').text(),
-                reservationType: 1,
-                totalPrice: ticketArray.reduce((a, v) => a + parseInt(v.totalPrice), 0)
-            };
-            /*
+
+    		var obj = {};
+    		obj.productId=$('.ct').data('product-id');
+    		obj.generalTicketCount=ticketArray[0].count;
+    		obj.youthTicketCount=ticketArray[1].count;
+    		obj.childTicketCount=ticketArray[2].count;
+    		obj.reservationName=$('#name').val();
+    		obj.reservationEmail=$('#email').val();
+    		obj.reservationTel=$('#tel').val();
+    		obj.reservationDate= $('#reservation_date').text();
+    		obj.reservationType= 1;
+    		obj.totalPrice=ticketArray.reduce((a, v) => a + parseInt(v.totalPrice), 0);
+
             $.ajax({
                 method: 'post',
                 data: JSON.stringify(obj),
-                contentType: 'application/json; charset=utf-8',
+                contentType: 'application/json;charset=utf-8',
                 url: '/api/booking',
                 success: response => {
-                    if (response === 1) {
+                    if (response != 0) {
+                    	alert('예약완료되었습니다.\n예약번호 : '+response);
                         location.href = '/my-reservation';
                     } else {
-                        alert('뭔가 잘못되었습니다. ^^;');
+                        alert('오류발생! 잠시 후 다시 예매해주세요.');
                     }
                 },
                 error: (request, status, error) => {
-                    console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                	alert('오류발생! 잠시 후 다시 예매해주세요.\n'+'error code:' + request.status+'\n message:' + request.responseText +'\n error:' + error);
                 }
             });
-            */
+           
         }
     	
     	return {

@@ -1,8 +1,11 @@
 package com.booking.api;
 
+import java.util.Iterator;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,9 +25,17 @@ public class ReservationRestController {
 	}
 	
 	@PostMapping
-	public void insertReservation(@ModelAttribute ReservationDto reservationDto, @AuthUser User user){
+	public int insertReservation(@RequestBody ReservationDto reservationDto, @AuthUser User user){
+		System.out.println(reservationDto.toString());
 		reservationDto.setUserId(user.getId());
-		int rid = reservationService.insertReservation(reservationDto);
-		System.out.println(rid);
+		try{
+			int rid = reservationService.insertReservation(reservationDto);
+			System.out.println(rid);
+			return rid;
+		}catch(Exception e){
+			System.out.println("ERROR!");
+			return 0;
+		}
+		
 	}
 }

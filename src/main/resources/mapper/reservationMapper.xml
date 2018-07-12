@@ -3,10 +3,8 @@
 
 <mapper namespace="com.booking.dao.ReservationDao">
 	<insert id="insertReservation" parameterType="com.booking.dto.ReservationDto">
-		INSERT INTO reservation_info(product_id, user_id, general_ticket_count, youth_ticket_count, child_ticket_count,
-		,reservation_name, reservation_tel, reservation_email, reservation_date, reservation_type, create_date, modify_date, total_price)
-		VALUES (#{productId}, #{userId}, #{generalTicketCount}, #{youthTicketCount}, #{childTicketCount}, 
-		#{reservationName}, #{reservationTel}, #{reservationEmail}, #{reservationDate}, #{reservationType}, SYSDATE(), SYSDATE(), #{totalPrice})
+		INSERT INTO reservation_info(product_id, user_id, general_ticket_count, youth_ticket_count, child_ticket_count, reservation_name, reservation_tel, reservation_email, reservation_date, reservation_type, create_date, modify_date, total_price)
+		VALUES (#{productId}, #{userId}, #{generalTicketCount}, #{youthTicketCount}, #{childTicketCount}, #{reservationName}, #{reservationTel}, #{reservationEmail}, #{reservationDate}, #{reservationType}, SYSDATE(), SYSDATE(), #{totalPrice})
 		<selectKey resultType="int" keyProperty="id" order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
