@@ -28,7 +28,7 @@ public class HomeController {
 		this.productService = productService;
 	}
 	
-	@GetMapping("/")
+	@GetMapping
 	public String mvHome(Model model) {
 		List<CategoryDto> categoryList = categoryService.selectAll();
 		

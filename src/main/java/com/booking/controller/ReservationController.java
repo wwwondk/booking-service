@@ -4,17 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.booking.config.AuthUser;
-import com.booking.dto.ReservationDto;
-import com.booking.dto.User;
 import com.booking.service.ProductService;
 
 @Controller
+@RequestMapping("/reservations")
 public class ReservationController {
 
 	private ProductService productService;
@@ -24,7 +20,7 @@ public class ReservationController {
 		this.productService = productService;
 	}
 
-	@GetMapping("/reservations")
+	@GetMapping
 	public String reservation(Model model, @RequestParam("pid") int productId) {
 		model.addAttribute("product", productService.selectProductReservation(productId));
 		return "reserve";

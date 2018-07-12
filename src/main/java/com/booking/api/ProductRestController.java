@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.booking.dto.ProductDto;
 import com.booking.service.ProductService;
-import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 
 @RestController
 @RequestMapping("/categories")

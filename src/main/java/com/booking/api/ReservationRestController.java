@@ -14,7 +14,7 @@ import com.booking.dto.User;
 import com.booking.service.ReservationService;
 
 @RestController
-@RequestMapping("/api/booking")
+@RequestMapping("/appointments")
 public class ReservationRestController {
 	private ReservationService reservationService;
 	
