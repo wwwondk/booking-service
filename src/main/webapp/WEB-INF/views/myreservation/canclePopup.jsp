@@ -15,14 +15,14 @@
          </div>
          <div class="pop_bottom_btnarea">
              <div class="btn_gray">
-                 <a href="#" class="btn_bottom"><span>아니오</span></a>
+                 <a class="btn_bottom"><span>아니오</span></a>
              </div>
              <div class="btn_green">
-                 <a href="#" class="btn_bottom"><span>예</span></a>
+                 <a class="btn_bottom"><span>예</span></a>
              </div>
          </div>
          <!-- 닫기 -->
-         <a href="#" class="popup_btn_close" title="close">
+         <a class="popup_btn_close" title="close">
              <i class="spr_book2 ico_cls"></i>
          </a>
          <!--// 닫기 -->

@@ -46,8 +46,8 @@
 					</div>
 				</div>
         	</c:if>
-				<article class="card_item">
-					<a href="#" class="link_booking_details">
+				<article class="card_item" id="card${reservation.id }">
+					<a class="link_booking_details">
 						<div class="card_body">
 						    <div class="left"></div>
 						    <div class="middle">
