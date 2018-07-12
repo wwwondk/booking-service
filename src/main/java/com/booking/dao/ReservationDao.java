@@ -4,4 +4,5 @@ import com.booking.dto.ReservationDto;
 
 public interface ReservationDao {
 	public int insertReservation(ReservationDto reservationDto);
+	public int deleteReservation(int reservationId);
 }

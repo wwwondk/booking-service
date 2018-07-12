@@ -1,9 +1,8 @@
 package com.booking.api;
 
-import java.util.Iterator;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,5 +34,10 @@ public class ReservationRestController {
 			return 0;
 		}
 		
+	}
+	
+	@DeleteMapping("/{id}")
+	public int deleteReservation(@PathVariable int id){
+		return reservationService.deleteReservation(id);
 	}
 }

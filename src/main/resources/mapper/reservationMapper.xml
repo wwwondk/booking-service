@@ -8,5 +8,13 @@
 		<selectKey resultType="int" keyProperty="id" order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-	</insert>	
+	</insert>
+	
+	<update id="deleteReservation" parameterType="Integer">
+		UPDATE reservation_info
+		SET
+		reservation_type = 'REFUND_CANCEL',
+		modify_date = SYSDATE()
+		WHERE id = #{id}
+	</update>	
 </mapper>

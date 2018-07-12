@@ -22,5 +22,10 @@ public class ReservationServiceImpl implements ReservationService {
 		reservationDao.insertReservation(reservationDto);
 		return reservationDto.getId();
 	}
-	
+
+	@Override
+	public int deleteReservation(int reservationId) {
+		return reservationDao.deleteReservation(reservationId);
+	}
+
 }
