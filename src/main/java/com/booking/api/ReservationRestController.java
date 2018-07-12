@@ -26,11 +26,9 @@ public class ReservationRestController {
 	
 	@PostMapping
 	public int insertReservation(@RequestBody ReservationDto reservationDto, @AuthUser User user){
-		System.out.println(reservationDto.toString());
 		reservationDto.setUserId(user.getId());
 		try{
 			int rid = reservationService.insertReservation(reservationDto);
-			System.out.println(rid);
 			return rid;
 		}catch(Exception e){
 			System.out.println("ERROR!");
