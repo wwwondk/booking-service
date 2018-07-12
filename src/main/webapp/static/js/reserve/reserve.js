@@ -30,6 +30,7 @@ $(function(){
 				this.btnMinus.removeClass('disabled');
 				this.countInput.removeClass('disabled');
 			}
+			$('#booking_ticket_count').trigger('change');
 		}
 		clickMinus(){
 			if(this.count <= 0)
@@ -42,6 +43,7 @@ $(function(){
 				this.btnMinus.addClass('disabled');
 				this.countInput.addClass('disabled');
 			}
+			$('#booking_ticket_count').trigger('change');
 		}
 		changeCountInput(){
 			this.countInput.val(this.count);
@@ -72,8 +74,10 @@ $(function(){
     	var tickets;
     	
     	function init(tickets){
+    		console.log('init')
+    		console.log(this);
     		this.tickets = tickets;
-    		bindEvents(tickets);
+    		bindEvents(this.tickets);
             checkName.apply($('#name').get(0));
             checkTel.apply($('#tel').get(0));
             checkEmail.apply($('#email').get(0));
@@ -86,16 +90,14 @@ $(function(){
     	    $('#email').on('keyup', checkEmail);
     	    $('#checkagree').on('click', checkAgreement);
             $('a.btn_agreement').on('click', toggleOpen);
-            $('button.bk_btn').on('click', checkButton)
-            $('.count_control_input').on('change', changeTotalCount); 
-    	    //$(tickets).each((i, v) => v.on('change', changeTotalCount)); 
+            $('button.bk_btn').on('click', checkButton);
+            $('#booking_ticket_count').on('change', {tickets:this.tickets}, changeTotalCount);
     	}
     	
-    	function changeTotalCount() {
-    		console.log('1');
-	        totalCount = ticketArray.reduce((a, v) => a + v.count, 0);
+    	function changeTotalCount(e) {
+	        totalCount = e.data.tickets.reduce((a, v) => a + v.count, 0);
 	        $('#booking_ticket_count').text(totalCount);
-	        totalCountCheck();
+	        checkTotalCount();
 	    }
     	
     	function toggleOpen() {
