@@ -6,4 +6,7 @@
 <script type="text/javascript" src="/static/js/home/timer.js"></script>
 <script type="text/javascript" src="/static/js/home/productList.js"></script>
 -->
+<script type="text/javascript" src="/static/js/home/category.js"></script>
+<script type="text/javascript" src="/static/js/home/slider.js"></script>
+<script type="text/javascript" src="/static/js/home/sliderTimer.js"></script>
 <script type="text/javascript" src="/static/js/home/home.js"></script>
