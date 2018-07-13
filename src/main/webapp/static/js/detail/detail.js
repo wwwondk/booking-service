@@ -98,7 +98,8 @@ $(function(){
 
 	    function setGeocode(status, response) {
 	        if (status !== naver.maps.Service.Status.OK) {
-	            return alert(myAddress + '의 검색 결과가 없습니다.');
+	        	console.log(myAddress + '의 검색 결과가 없습니다.');
+	            return;
 	        }
 	        var result = response.result;
 	        var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);

@@ -11,7 +11,7 @@
                     </div>
                     <div class="group_visual">
                         <div>
-                            <div class="container_visual" style="width: 414px;">
+                            <div class="container_visual" style="width: 414px; margin-top: 48px;">
                                 <ul class="visual_img">
                                 	<c:forEach var="banner" items="${product.bannerImageIdList }">
                                 	<li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="/files/${banner }"> <span class="img_bg"></span>
