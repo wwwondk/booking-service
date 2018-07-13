@@ -8,16 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.booking.config.AuthUser;
 import com.booking.dao.ReviewDao;
 import com.booking.dto.ReviewDetailDto;
 import com.booking.dto.ReviewDto;
 import com.booking.dto.ReviewWriteDto;
-import com.booking.dto.User;
 import com.booking.service.FileService;
 import com.booking.service.ReviewService;
 
@@ -37,8 +34,8 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<ReviewDto> selectProductReviewList(int productId, int page, int limit) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("productId", productId);
-		param.put("page", page);
-		param.put("limit", 3);
+		param.put("page", page*limit);
+		param.put("limit", page*limit+limit);
 		return reviewDao.selectProductReviewList(param);
 	}
 
