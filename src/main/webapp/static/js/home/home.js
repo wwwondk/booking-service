@@ -66,34 +66,90 @@ $(function(){
 	});
 	
 	// slider
-	var curImgIndex = 0;
-	var maxImgIndex = 2;
-	var imgWidth = 338;
-
-	var isMoving = false;
-	
-	$('#btn_prev').on('click', clickBtnPre);
-	$('#btn_nxt').on('click', clickBtnNext);
-	
-	function clickBtnPre(){
-        if (curImgIndex > 0) {
-        	curImgIndex--;
-        } else if (curImgIndex === 0) {
-        	curImgIndex = maxImgIndex;
-        }
-        $('.visual_img').stop().animate({left:-(curImgIndex*imgWidth)+'px'}, 500);
-
-	}
-	
-	function clickBtnNext(){
-		if (curImgIndex < maxImgIndex) {
-			curImgIndex++;
-        } else if (curImgIndex === maxImgIndex) {
-        	curImgIndex = 0;
-        }
-		$('.visual_img').stop().animate({right:(curImgIndex*imgWidth)+'px'}, 500);
-
-	}
+	class Slider {
+		constructor(root, btnPrev, btnNext, imgWidth){
+			this.root = root;
+			this.btnPrev = btnPrev;
+			this.btnNext = btnNext;
+			this.IMG_WIDTH = imgWidth;
+			this.index = 0;
+			this.maxIndex = $(root).children().length - 2;
+			this.isMoving = false;
+			this.bindEvents();
+		}
 		
+		bindEvents(){
+			$(this.btnPrev).on('click', this.prev.bind(this));
+			$(this.btnNext).on('click', this.next.bind(this));
+		}
+		
+		prev(){
+			if (this.index > 0) {
+	            this.index--;
+	        } else if(this.index === 0) {
+	            this.index = this.maxIndex;
+	        }
+			this.moveImg();
+		}
+		
+		next(){
+			if (this.index < this.maxIndex) {
+	            this.index++;
+	        } else if(this.index === this.maxIndex) {
+	            this.index = 0;
+	        }
+			this.moveImg();
+		}
+		
+		moveImg(){
+			if(this.isMoving)
+				return;
+			
+			this.isMoving = true;
+			$(this.root).animate({left:-(this.index*this.IMG_WIDTH)+'px'}, this.endMove.bind(this));
+		}
+		
+		endMove(){
+			this.isMoving = false;
+		}
+	}
+	
+	var slider = new Slider('.visual_img', '#btn_prev', '#btn_nxt', 338);
+
+	class SlideTimer {
+	    constructor(slider) {
+	        this.slider = slider;
+	        this.interval;
+	        this.timeout;
+	        this.startTimer();
+	        this.bindEvents();
+	    }
+
+	    bindEvents() {
+	        $(window).on('blur', this.pauseTimer.bind(this))
+	            	 .on('focus', this.startTimer.bind(this));
+	    }
+
+	    pauseTimer() {
+	        clearTimeout(this.timeout);
+	        clearInterval(this.interval);
+	    }
+
+	    startTimer() {
+	        this.interval = setInterval(this.slider.next.bind(this.slider), 2000);
+	    }
+
+	    resetTimer() {
+	        this.timeout = setTimeout(this.startTimer.bind(this), 2000);
+	    }
+
+	    clearAndResetTimer() {
+	        this.pauseTimer();
+	        this.resetTimer();
+	    }
+	};
+	
+	new SlideTimer(slider);
+	
 });
 
