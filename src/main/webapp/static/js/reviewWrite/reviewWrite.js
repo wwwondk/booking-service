@@ -1,5 +1,7 @@
 $(function(){
 	
+	$('a.btn_back').on('click', () => history.back());
+	
 	// 별점
 	var starPoint = 0;
 	var starIndex = 0;
