@@ -8,7 +8,7 @@
 				<a href="#" class="btn_back" title="이전 화면으로 이동"> 
 					<i class="fn fn-backward1"></i> 
 				</a>
-				<h2><a class="title" href="#">${comments.productName}</a></h2>
+				<h2><a class="title" data-product-id="${comments.productId}">${comments.productName}</a></h2>
             </div>
 		</div>
         <div class="section_review_list">
@@ -26,4 +26,5 @@
         </div>
 	</div>
 </div>
+<tiles:insertAttribute name="review-list-template" />
 <hr> 

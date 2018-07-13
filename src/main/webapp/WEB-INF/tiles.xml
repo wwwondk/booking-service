@@ -53,6 +53,7 @@
 	<definition name="review.content" template="/WEB-INF/views/layout/review.jsp">
 		<put-attribute name="grade" value="/WEB-INF/views/review/grade.jsp" />
 		<put-attribute name="reviewList" value="/WEB-INF/views/review/reviewList.jsp" />
+		<put-attribute name="review-list-template" value="/WEB-INF/views/review/review-list-template.jsp"/>
 	</definition>
 	
 	<!-- My Reservation Page Content -->

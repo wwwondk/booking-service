@@ -10,6 +10,6 @@
 		<em class="total">5.0</em> 
 	</strong> 
 	<span class="join_count">
-		<em class="green">${comments.reviewCount }건</em> 등록
+		<em class="green" data-review-count="${comments.reviewCount }">${comments.reviewCount }건</em> 등록
 	</span>
 </div>
