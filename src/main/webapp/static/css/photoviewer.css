@@ -1,0 +1,27 @@
+#photoViewer {
+	position: fixed;
+    left:0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    z-index:9000;
+    background-color:#000;
+    word-wrap: normal;
+}
+
+#layer {
+	z-index: 100;
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    text-align: center
+}
+
+#layer .group_visual {
+	margin-left: auto; 
+	margin-right: auto; 
+	display: inline-block; 
+}

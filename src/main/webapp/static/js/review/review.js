@@ -31,4 +31,9 @@ $(function(){
 		});
 	}
 
+	
+	$('.thumb_area').on('click', function(){
+		console.log('click');
+		$('#photoViewer').css('display', 'block');
+	});
 });
