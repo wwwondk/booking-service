@@ -1,20 +1,20 @@
 class Slider {
-		constructor(root, btnPrev, btnNext, imgWidth){
-			this.root = root;
-			this.btnPrev = btnPrev;
-			this.btnNext = btnNext;
-			this.IMG_WIDTH = imgWidth;
-			this.index = 0;
-			this.maxIndex = $(root).children().length - 2;
-			this.isMoving = false;
-			this.bindEvents();
-		}
-		
-		bindEvents(){
-			$(this.btnPrev).on('click', this.prev.bind(this));
-		$(this.btnNext).on('click', this.next.bind(this));
+	constructor(root, btnPrev, btnNext, imgWidth){
+		this.root = root;
+		this.btnPrev = btnPrev;
+		this.btnNext = btnNext;
+		this.IMG_WIDTH = imgWidth;
+		this.index = 0;
+		this.maxIndex = $(root).children().length - 2;
+		this.isMoving = false;
+		this.bindEvents();
 	}
 	
+	bindEvents(){
+		$(this.btnPrev).on('click', this.prev.bind(this));
+		$(this.btnNext).on('click', this.next.bind(this));
+	}
+
 	prev(){
 		if (this.index > 0) {
             this.index--;

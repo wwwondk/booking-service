@@ -33,8 +33,8 @@
 	<div class="pagination">
         <div class="bg_pagination"></div>
         <div class="figure_pagination">
-            <span class="num">1</span>
-            <span class="num off">/ <span>3</span></span>
+            <span class="num"><span class="page_index">1</span></span>
+            <span class="num off">/ <span class="total_count">3</span></span>
         </div>
     </div>
     <div id="layer">
