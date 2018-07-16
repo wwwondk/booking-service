@@ -38,7 +38,7 @@ class PhotoViewer {
 		next(){
 			if (this.index < this.maxIndex-1) {
 				this.index++;
-				console.log("click NEXT " + this.index);
+
 				$(this.pagination).find('.page_index').text(this.index+1);
 				$(this.btnPrev).find('.spr_book2').removeClass('off');
 				$(this.imgRoot).animate({left:(-(this.index)*this.IMG_WIDTH)+'px'}, 500);
