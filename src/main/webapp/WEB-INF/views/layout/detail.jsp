@@ -24,4 +24,5 @@
                 <tiles:insertAttribute name="detailInformation" /> 
             </div>
         </div>
-    <div id="photoviwer"></div>
+        <tiles:insertAttribute name="photoViewer" /> 
+        <tiles:insertAttribute name="photo-list-template" /> 

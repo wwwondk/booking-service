@@ -29,7 +29,9 @@
 		<!-- <put-attribute name="?" value="review.content" > -->
 		<put-attribute name="grade" value="/WEB-INF/views/detail/grade.jsp" />
 		<put-attribute name="reviewList" value="/WEB-INF/views/detail/reviewList.jsp" />
-		<put-attribute name="detailInformation" value="/WEB-INF/views/detail/detailInformation.jsp" />	
+		<put-attribute name="detailInformation" value="/WEB-INF/views/detail/detailInformation.jsp" />
+		<put-attribute name="photoViewer" value="/WEB-INF/views/review/photoViewer.jsp" />
+		<put-attribute name="photo-list-template" value="/WEB-INF/views/review/photo-list-template.jsp"/>
 	</definition>	
 	
 	<!-- Reserve Page Content -->
