@@ -21,7 +21,6 @@ $(function(){
 	var template = Handlebars.compile(source);
 	
 	function getReviewList(){
-		console.log('page : ' + page);
 		$.ajax({
 			url : '/comments',
 			method : 'GET',
@@ -40,72 +39,22 @@ $(function(){
 	  }
 	});	
 	
-	class PhotoViewer {
-		constructor(root,imgRoot, btnPrev, btnNext, imgWidth, pagination,  btnClose){
-			this.root = root;
-			this.imgRoot = imgRoot;
-			this.pagination = pagination;
-			this.btnPrev = btnPrev;
-			this.btnNext = btnNext;
-			this.btnClose = btnClose;
-			this.IMG_WIDTH = imgWidth;
-			this.index = 0;
-			this.maxIndex = $(imgRoot).children().length;
-			$(this.pagination).find('.total_count').text(this.maxIndex);
-			this.bindEvents();
-		}
-		
-		bindEvents(){
-			$(this.btnPrev).on('click', this.prev.bind(this));
-			$(this.btnNext).on('click', this.next.bind(this));
-			if(this.btnClose != null)
-				$(this.btnClose).on('click', this.close.bind(this));
-		}
-		
-		prev(){
-			if (this.index > 0) {
-				this.index--;
-	        	$(this.btnNext).find('.spr_book2').removeClass('off');
-	        	
-	        	$(this.pagination).find('.page_index').text(this.index+1);
-
-	        	$(this.imgRoot).animate({left:(-(this.index)*this.IMG_WIDTH)+'px'}, 500);
-	        	if (this.index === 0) {
-        			$(this.btnPrev).find('.spr_book2').addClass('off');
-        		}
-
-	        } 
-		}
-		
-		next(){
-			if (this.index < this.maxIndex-1) {
-				this.index++;
-				console.log("click NEXT " + this.index);
-				$(this.pagination).find('.page_index').text(this.index+1);
-				$(this.btnPrev).find('.spr_book2').removeClass('off');
-				$(this.imgRoot).animate({left:(-(this.index)*this.IMG_WIDTH)+'px'}, 500);
-				if (this.index === this.maxIndex){
-					$(this.btnNext).find('.spr_book2').addClass('off');
-				}
-
-	        }
-			
-		}
-		
-		open(){
-			$(this.root).css('display', 'block');
-		}
-		
-		close(){
-			$(this.root).css('display', 'none');
-		}
-	}
 	
 	
 	var photoViewer = new PhotoViewer('#photoViewer', '.visual_img', '.prev_inn', '.nxt_inn', 500, '.pagination', '.popup_btn_close');
-	
+	var photoSource = $('#photo-template').html();
+	var photoTemplate = Handlebars.compile(photoSource);
 	$('.thumb_area').on('click', function(e){
-		console.log($(e.currentTarget).data('comment-id'));
+		
+		var commentId = $(e.currentTarget).data('comment-id');
+		console.log('commentId '+commentId);
+		
+		$.ajax({
+			url : '/comments/'+commentId+'/images',
+			method : 'GET'
+		}).done(function(res){
+			photoViewer.setPhotos(res, photoTemplate);
+		});
 		//photoViewer.open();
 	});
 	
