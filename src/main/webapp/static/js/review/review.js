@@ -21,6 +21,7 @@ $(function(){
 	var template = Handlebars.compile(source);
 	
 	function getReviewList(){
+		console.log('page : ' + page);
 		$.ajax({
 			url : '/comments',
 			method : 'GET',
@@ -31,7 +32,13 @@ $(function(){
 		});
 	}
 
-		
+	Handlebars.registerHelper('isThumbnail', function(options) {
+	  if (this.thumbnailFileId != 0) {
+	    return options.fn(this);
+	  } else {
+	    return options.inverse(this);
+	  }
+	});	
 	
 	class PhotoViewer {
 		constructor(root,imgRoot, btnPrev, btnNext, imgWidth, pagination,  btnClose){
@@ -94,9 +101,12 @@ $(function(){
 		}
 	}
 	
+	
 	var photoViewer = new PhotoViewer('#photoViewer', '.visual_img', '.prev_inn', '.nxt_inn', 500, '.pagination', '.popup_btn_close');
-	$('.thumb_area').on('click', function(){
-		photoViewer.open();
+	
+	$('.thumb_area').on('click', function(e){
+		console.log($(e.currentTarget).data('comment-id'));
+		//photoViewer.open();
 	});
 	
 });

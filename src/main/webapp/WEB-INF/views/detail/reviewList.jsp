@@ -6,16 +6,22 @@
 <c:forEach var="ritem" items="${product.reviews }">
 	<li class="list_item">
         <div>
+           	<c:if test="${ritem.thumbnailFileId ne 0 }">
             <div class="review_area">
                	<div class="thumb_area">
-           		<c:if test="${ritem.thumbnailFileId ne 0 }">
                    <a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="/files/${ritem.thumbnailFileId}" alt="리뷰이미지"> </a> <span class="img_count">${ritem.thumbnailCount }</span>                                                
-           		</c:if>
                    </div>
 
                	<h4 class="resoc_name">${product.name }</h4>
                	<p class="review">${ritem.comment }</p>
             </div>
+           	</c:if>
+           	<c:if test="${ritem.thumbnailFileId eq 0 }">
+           	<div class="review_area no_img">
+                <h4 class="resoc_name">${product.name }</h4>
+                <p class="review">${ritem.comment }</p>
+            </div>
+           	</c:if>
             <div class="info_area">
                 <div class="review_info"> <span class="grade">${ritem.score }</span> <span class="name">${ritem.nickname }****</span> <span class="date">${ritem.createDate }</span> </div>
             </div>
