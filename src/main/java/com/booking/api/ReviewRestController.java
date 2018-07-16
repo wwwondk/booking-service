@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.booking.config.AuthUser;
 import com.booking.dto.ReviewDto;
 import com.booking.dto.User;
+import com.booking.service.FileService;
 import com.booking.service.ReviewService;
 
 @RestController
@@ -22,10 +24,12 @@ import com.booking.service.ReviewService;
 public class ReviewRestController {
 	
 	private ReviewService reviewService;
+	private FileService fileService;
 	
 	@Autowired
-	public ReviewRestController(ReviewService reviewService) {
+	public ReviewRestController(ReviewService reviewService, FileService fileService) {
 		this.reviewService = reviewService;
+		this.fileService = fileService;
 	}
 
 	@PostMapping
@@ -41,4 +45,8 @@ public class ReviewRestController {
 		return reviewService.selectProductReviewList(productId, page, 10);
 	}
 	
+	@GetMapping("/{commentId}/images")
+	public List<Integer> selectReviewImageList(@PathVariable int commentId){
+		return fileService.selectReviewImageList(commentId);
+	}
 }

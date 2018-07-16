@@ -25,6 +25,12 @@
 		FROM product_image
 		WHERE product_id = #{productId} AND (type = 4)
 	</select>
+	
+	<select id="selectReviewImageList" parameterType="Integer" resultType="Integer">
+		SELECT ruci.file_id
+		FROM reservation_user_comment ruc LEFT JOIN reservation_user_comment_image ruci ON ruc.id = ruci.reservation_user_comment_id
+		WHERE ruc.id = #{reviewId}
+	</select>
 
 	<insert id="insertImage" parameterType="com.booking.dto.FileDto">
 		INSERT INTO file(user_id, file_name, save_file_name, file_length, content_type, delete_flag, create_date, modify_date)

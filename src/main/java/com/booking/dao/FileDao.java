@@ -12,5 +12,6 @@ public interface FileDao {
 	public List<Integer> selectProductImageList(int productId);
 	public List<Integer> selectProductNoticeImageList(int productId);
 	public Integer selectProductInformationImage(int productId);
+	public List<Integer> selectReviewImageList(int reviewId);
 	public Integer insertImage(FileDto fileDto);
 }

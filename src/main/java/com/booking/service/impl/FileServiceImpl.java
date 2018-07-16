@@ -52,6 +52,11 @@ public class FileServiceImpl implements FileService {
 	public Integer selectProductInformationImage(int productId){
 		return fileDao.selectProductInformationImage(productId);
 	}
+	
+	@Override
+	public List<Integer> selectReviewImageList(int reviewId) {
+		return fileDao.selectReviewImageList(reviewId);
+	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
