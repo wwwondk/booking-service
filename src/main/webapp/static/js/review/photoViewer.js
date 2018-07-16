@@ -57,7 +57,6 @@ class PhotoViewer {
 			$(this.root).find(this.imgRoot).empty();
 			$(this.root).find(this.imgRoot).append(this.photoTemplate({photos: list}));
 			$(this.root).find(this.imgRoot).animate({left:'0px'}, 0);
-			console.log(this.index + " / "+this.maxIndex);
 			this.open();
 		}
 		

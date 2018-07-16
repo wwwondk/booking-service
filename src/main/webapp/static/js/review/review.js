@@ -1,43 +1,39 @@
-var Review = (function(){
-	var header;
-	var pid;
-	var pname;
-	var page;
-	var maxPage;
-	var source;
-	var template;
-	var photoViewer;
-
-	function init(header, reviewPanel, reviewCount, source, photoViewer){
+class Review {
+	constructor(header, reviewPanel, reviewCount, source, photoViewer){
 		this.header = header;
 		this.reviewPanel = reviewPanel;
 		this.pid = $(header).find('.title').data('product-id');
 		this.pname = $(header).find('.title').text();
 		this.page = 0;
 		this.maxPage = parseInt((reviewCount%10===0) ? reviewCount/10 : reviewCount/10+1);
-		this.source = $(source).html();
-		this.template = Handlebars.compile(this.source);
+		if(source != null){
+			this.source = $(source).html();
+			this.template = Handlebars.compile(this.source);
+		}
 		this.photoViewer = photoViewer;
-		bindEvents.apply(this);
+		this.bindEvents();
 	}
 	
-	function bindEvents(){
+	bindEvents(){
 		var thumb = this.reviewPanel+' .thumb_area';
-		$(document).on('click', thumb, clickPhotoViewer.bind(this));	
+		$(document).on('click', thumb, this.clickPhotoViewer.bind(this));	
 	}
 	
-	function clickPhotoViewer(e){
+	clickPhotoViewer(e){
 		var commentId = $(e.currentTarget).data('comment-id');
-		var photoViewer = this.photoViewer;
+		var pv = this.photoViewer;
 		$.ajax({
 			url : '/comments/'+commentId+'/images',
 			method : 'GET'
 		}).done(function(res){
-			photoViewer.setPhotos(res);
+			pv.setPhotos(res);
 		});
 	}
 	
-	function getReviewList(){
+	getReviewList(){
+		if(this.source === null)
+			return;
+		
 		var reviewPanel = this.reviewPanel;
 		var template = this.template;
 		var pname = this.pname;
@@ -50,11 +46,4 @@ var Review = (function(){
 			$(reviewPanel).find('.resoc_name').text(pname);
 		});
 	}
-
-	return {
-		init : init,
-		page : page,
-		maxPage : maxPage,
-		getReviewList : getReviewList
-	}
-})();
+}

@@ -11,14 +11,14 @@ $(function(){
 		}
 	});	
 	
-	Review.init('.review_header', '.list_short_review', $('.join_count .green').data('review-count'), '#review-template', photoViewer);
+	var review = new Review('.review_header', '.list_short_review', $('.join_count .green').data('review-count'), '#review-template', photoViewer);
 	
 	$(window).scroll(function(){
 		var height = $(document).scrollTop();
 		if($(window).scrollTop() === $(document).height() - $(window).height()){
-			if(Review.page < Review.maxPage){
-				Review.page++;
-				Review.getReviewList();
+			if(review.page < review.maxPage){
+				review.page++;
+				review.getReviewList();
 			}
 		}
 	});
