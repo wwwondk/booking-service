@@ -2,3 +2,4 @@
 <!DOCTYPE html>
 <script type="text/javascript" src="/static/js/review/photoViewer.js"></script>
 <script type="text/javascript" src="/static/js/review/review.js"></script>
+<script type="text/javascript" src="/static/js/review/review-main.js"></script>

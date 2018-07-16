@@ -1,5 +1,5 @@
 class PhotoViewer {
-		constructor(root,imgRoot, btnPrev, btnNext, imgWidth, pagination,  btnClose){
+		constructor(root,imgRoot, btnPrev, btnNext, imgWidth, pagination,  btnClose, photoTemplate){
 			this.root = root;
 			this.imgRoot = imgRoot;
 			this.pagination = pagination;
@@ -10,6 +10,7 @@ class PhotoViewer {
 			this.index = 0;
 			this.maxIndex = $(imgRoot).children().length;
 			$(this.pagination).find('.total_count').text(this.maxIndex);
+			this.photoTemplate = photoTemplate;
 			this.bindEvents();
 		}
 		
@@ -50,13 +51,13 @@ class PhotoViewer {
 			
 		}
 		
-		setPhotos(list, photoTemplate){
+		setPhotos(list){
 			this.index = 0;
 			this.maxIndex = list.length;
 			$(this.pagination).find('.page_index').text(this.index+1);
 			$(this.pagination).find('.total_count').text(this.maxIndex);
 			$(this.imgRoot).empty();
-			$(this.imgRoot).append(photoTemplate({photos: list}));
+			$(this.imgRoot).append(this.photoTemplate({photos: list}));
 			this.open();
 		}
 		

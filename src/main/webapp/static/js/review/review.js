@@ -1,59 +1,60 @@
-$(function(){
-	
-	var pid = $('.review_header').find('.title').data('product-id');
-	var pname = $('.review_header').find('.title').text();
-	
-	var page = 0;
-	var reviewCount = $('.join_count .green').data('review-count');
-	var maxPage = parseInt((reviewCount%10===0) ? reviewCount/10 : reviewCount/10+1);
-	
-	$(window).scroll(function(){
-		var height = $(document).scrollTop();
-		if($(window).scrollTop() === $(document).height() - $(window).height()){
-			if(page < maxPage){
-				page++;
-				getReviewList();
-			}
-		}
-	});
-	
-	var source = $('#review-template').html();
-	var template = Handlebars.compile(source);
-	
-	function getReviewList(){
-		$.ajax({
-			url : '/comments',
-			method : 'GET',
-			data : {'page' : page, 'pid' : pid}
-		}).done(function(res){
-			$('.list_short_review').append(template({reviews: res}));
-			$('.resoc_name').text(pname);
-		});
+var Review = (function(){
+	var header;
+	var pid;
+	var pname;
+	var page;
+	var maxPage;
+	var source;
+	var template;
+	var photoViewer;
+
+	function init(header, reviewPanel, reviewCount, source, photoViewer){
+		this.header = header;
+		this.reviewPanel = reviewPanel;
+		this.pid = $(header).find('.title').data('product-id');
+		this.pname = $(header).find('.title').text();
+		this.page = 0;
+		this.maxPage = parseInt((reviewCount%10===0) ? reviewCount/10 : reviewCount/10+1);
+		this.source = $(source).html();
+		this.template = Handlebars.compile(this.source);
+		this.photoViewer = photoViewer;
+		bindEvents.apply(this);
 	}
-
-	Handlebars.registerHelper('isThumbnail', function(options) {
-	  if (this.thumbnailFileId != 0) {
-	    return options.fn(this);
-	  } else {
-	    return options.inverse(this);
-	  }
-	});	
 	
-
-	var photoViewer = new PhotoViewer('#photoViewer', '.visual_img', '.prev_inn', '.nxt_inn', 500, '.pagination', '.popup_btn_close');
-	var photoSource = $('#photo-template').html();
-	var photoTemplate = Handlebars.compile(photoSource);
+	function bindEvents(){
+		var thumb = this.reviewPanel+' .thumb_area';
+		$(document).on('click', thumb, clickPhotoViewer.bind(this));	
+	}
 	
-	$(document).on('click', '.thumb_area', function(e){
+	function clickPhotoViewer(e){
 		var commentId = $(e.currentTarget).data('comment-id');
-		
+		var photoViewer = this.photoViewer;
 		$.ajax({
 			url : '/comments/'+commentId+'/images',
 			method : 'GET'
 		}).done(function(res){
-			photoViewer.setPhotos(res, photoTemplate);
+			photoViewer.setPhotos(res);
 		});
-
-	});
+	}
 	
-});
+	function getReviewList(){
+		var reviewPanel = this.reviewPanel;
+		var template = this.template;
+		var pname = this.pname;
+		$.ajax({
+			url : '/comments',
+			method : 'GET',
+			data : {'page' : this.page, 'pid' : this.pid}
+		}).done(function(res){
+			$(reviewPanel).append(template({reviews: res}));
+			$(reviewPanel).find('.resoc_name').text(pname);
+		});
+	}
+
+	return {
+		init : init,
+		page : page,
+		maxPage : maxPage,
+		getReviewList : getReviewList
+	}
+})();
