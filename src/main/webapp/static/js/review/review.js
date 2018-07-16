@@ -28,6 +28,7 @@ $(function(){
 		}).done(function(res){
 			$('.list_short_review').append(template({reviews: res}));
 			$('.resoc_name').text(pname);
+			console.log('A');
 		});
 	}
 
@@ -39,13 +40,14 @@ $(function(){
 	  }
 	});	
 	
-	
-	
+
 	var photoViewer = new PhotoViewer('#photoViewer', '.visual_img', '.prev_inn', '.nxt_inn', 500, '.pagination', '.popup_btn_close');
 	var photoSource = $('#photo-template').html();
 	var photoTemplate = Handlebars.compile(photoSource);
-	$('.thumb_area').on('click', function(e){
-		
+	
+	$(document).on('click', '.thumb_area', function(e){
+		console.log('B');
+		console.log($(e.currentTarget));
 		var commentId = $(e.currentTarget).data('comment-id');
 		console.log('commentId '+commentId);
 		
@@ -55,7 +57,7 @@ $(function(){
 		}).done(function(res){
 			photoViewer.setPhotos(res, photoTemplate);
 		});
-		//photoViewer.open();
+
 	});
 	
 });
