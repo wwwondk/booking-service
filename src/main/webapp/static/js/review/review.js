@@ -28,7 +28,6 @@ $(function(){
 		}).done(function(res){
 			$('.list_short_review').append(template({reviews: res}));
 			$('.resoc_name').text(pname);
-			console.log('A');
 		});
 	}
 
@@ -46,10 +45,7 @@ $(function(){
 	var photoTemplate = Handlebars.compile(photoSource);
 	
 	$(document).on('click', '.thumb_area', function(e){
-		console.log('B');
-		console.log($(e.currentTarget));
 		var commentId = $(e.currentTarget).data('comment-id');
-		console.log('commentId '+commentId);
 		
 		$.ajax({
 			url : '/comments/'+commentId+'/images',
