@@ -26,8 +26,14 @@ var NaverMap = (function () {
     }
 
     function drawMap() {
-        var mapSrc = 'https://openapi.naver.com/v1/map/staticmap.bin?clientId=CA09P0ovGU8wMELmLUNF&url=http://localhost&crs=EPSG:4326&center=' + pointX + ',' + pointY + '&level=11&w=300&h=250&baselayer=default&markers=' + pointX + ',' + pointY;
-        $('.store_map').attr('src', mapSrc);
+    	var mapSrc = '';
+    	$.ajax({
+			url : '/files/maps',
+			method : 'GET',
+			data : {'pointX' : pointX, 'pointY' : pointY}
+		}).done(function(res){
+			$('.store_map').attr('src', res);
+		});
 
         var mapUrl = "http://map.naver.com/?lng=" + pointX + "&pinTitle=" + $('.addr_detail').text() + "&level=2&pinType=SITE&lat=" + pointY + "&enc=utf8";
         $('.store_location').attr('href', mapUrl);
