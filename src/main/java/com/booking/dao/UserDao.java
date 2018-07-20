@@ -7,6 +7,6 @@ import com.booking.dto.User;
 @Repository
 public interface UserDao {
 	public User selectByEmail(String email);
-	public User create(User user);
-	public User update(User user);
+	public Integer create(User user);
+	public Integer update(User user);
 }

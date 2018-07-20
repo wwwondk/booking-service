@@ -110,12 +110,12 @@ public class LoginController {
 			}
 
 			switch (checkingUser.checkNaverUser(naverUser)) {
-			case User.SAME:
-				break;
-
-			case User.NEED_UPDATE:
-				checkingUser = userService.update(naverUser.convertToUser());
-				break;
+				case User.SAME:
+					break;
+	
+				case User.NEED_UPDATE:
+					checkingUser = userService.update(naverUser.convertToUser());
+					break;
 
 			}
 			session.setAttribute("user", checkingUser);

@@ -9,8 +9,8 @@
 	<insert id="create" parameterType="com.booking.dto.User">
 		INSERT INTO users(username, email, tel, nickname, sns_id, sns_type, sns_profile, admin_flag, create_date, modify_date)
 		VALUES (#{username}, #{email}, #{tel}, #{nickname}, #{snsId}, #{snsType}, #{snsProfile}, 0, SYSDATE(), SYSDATE())
-		<selectKey resultType="com.booking.dto.User" order="AFTER">
-			SELECT SELECT LAST_INSERT_ID()
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			SELECT LAST_INSERT_ID() 
 		</selectKey>
 	</insert>
 	
@@ -26,8 +26,8 @@
 		sns_profile = #{snsProfile},
 		modify_date = SYSDATE()
 		WHERE id = #{id}
-		<selectKey resultType="com.booking.dto.User" order="AFTER">
-			SELECT SELECT LAST_INSERT_ID()
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</update>
 </mapper>
