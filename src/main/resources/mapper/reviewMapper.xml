@@ -9,16 +9,14 @@
 	</select>
 	
 	<select id="selectProductReviewList" parameterType="HashMap" resultType="com.booking.dto.ReviewDto">
-		SELECT result.*, IFNULL(reservation_user_comment_image.file_id, 0) as thumbnailFileId
-		FROM
-			(SELECT ruc.id, ruc.comment, ruc.score, ruc.create_date, u.nickname, COUNT(ruc.id) thumbnailCount
-			FROM reservation_user_comment ruc
-			INNER JOIN users u ON ruc.user_id = u.id
-			LEFT OUTER JOIN reservation_user_comment_image ruci ON ruc.id = ruci.reservation_user_comment_id
-			WHERE ruc.product_id = #{productId}
-			GROUP BY ruc.id
-			ORDER BY ruc.create_date
-			LIMIT #{page}, #{limit}) result, reservation_user_comment_image
+		SELECT ruc.id, ruc.comment, ruc.score, ruc.create_date, u.nickname, IFNULL(ruci.file_id, 0) as thumbnailFileId, COUNT(ruci.file_id) thumbnailCount
+		FROM reservation_user_comment ruc
+		INNER JOIN users u ON ruc.user_id = u.id
+		LEFT OUTER JOIN reservation_user_comment_image ruci ON ruc.id = ruci.reservation_user_comment_id
+		WHERE ruc.product_id = #{productId}
+		GROUP BY ruc.id
+		ORDER BY ruc.create_date
+		LIMIT #{page}, #{limit}
 	</select>
 	
 	<select id="selectReviewAvgCount" parameterType="Integer" resultType="com.booking.dto.ReviewDetailDto">

@@ -3,7 +3,6 @@ package com.booking.api;
 import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +19,6 @@ import com.booking.service.FileService;
 
 @RestController
 @RequestMapping("/files")
-
 @PropertySource("classpath:/auth.properties")
 public class FileRestController {
 	
