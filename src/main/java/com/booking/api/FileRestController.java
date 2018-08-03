@@ -43,7 +43,7 @@ public class FileRestController {
     }
 
     @GetMapping("/{id}")
-    public FileSystemResource downloadFile(@PathVariable int id, @RequestParam(required = false, defaultValue = "500") int size, HttpServletRequest request) throws IOException{
+    public FileSystemResource downloadFile(@PathVariable int id, @RequestParam(required = false) Integer size, HttpServletRequest request) throws IOException{
     	
     	String rootPath = request.getSession().getServletContext().getRealPath("/");
     	String originalFileName = fileService.selectSaveFileName(id);    	
@@ -53,24 +53,25 @@ public class FileRestController {
         if (!file.exists()) {
             throw new RuntimeException("File Not Found ID=[ "+id+" ]");
         } else {
-        	
-        	BufferedImage image = ImageIO.read(file);
-        	int imageWidth = image.getWidth();
-        	int imageHeight = image.getHeight();
-        	
-        	double ratio = (imageWidth > imageHeight) ?  (double)size/(double)imageWidth : (double)size/(double)imageHeight;
-        	int width = (int)(imageWidth * ratio);
-        	int height = (int)(imageHeight * ratio);
-        	
-    		Image resizeImage = image.getScaledInstance(width, height, Image.SCALE_FAST);
-    		BufferedImage newImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-    		Graphics graphics = newImage.getGraphics();
-    		graphics.drawImage(resizeImage, 0, 0, null);
-    		graphics.dispose();
-    		
-    		String name = originalFileName.substring(originalFileName.lastIndexOf("\\")+1);
-    		ImageIO.write(newImage, "png", new File(rootPath+"tempImage\\" + name));
-    		file = new File(rootPath+"tempImage\\" + name);
+        	if(size != null){
+	        	BufferedImage image = ImageIO.read(file);
+	        	int imageWidth = image.getWidth();
+	        	int imageHeight = image.getHeight();
+	        	
+	        	double ratio = (imageWidth > imageHeight) ?  (double)size/(double)imageWidth : (double)size/(double)imageHeight;
+	        	int width = (int)(imageWidth * ratio);
+	        	int height = (int)(imageHeight * ratio);
+	        	
+	    		Image resizeImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+	    		BufferedImage newImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+	    		Graphics graphics = newImage.getGraphics();
+	    		graphics.drawImage(resizeImage, 0, 0, null);
+	    		graphics.dispose();
+	    		
+	    		String name = originalFileName.substring(originalFileName.lastIndexOf("\\")+1);
+	    		ImageIO.write(newImage, "png", new File(rootPath+"tempImage\\" + name));
+	    		file = new File(rootPath+"tempImage\\" + name);
+        	}
         	return new FileSystemResource(file);
         	
         }
