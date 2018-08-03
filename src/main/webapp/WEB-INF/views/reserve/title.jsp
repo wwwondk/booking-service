@@ -5,7 +5,7 @@
 <div class="group_visual">
     <div class="container_visual" style="width: 414px;">
         <ul class="visual_img">
-            <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="/files/${product.fileId }"> <span class="img_bg"></span>
+            <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="/files/${product.fileId }?size=414"> <span class="img_bg"></span>
                 <div class="preview_txt">
                     <h2 class="preview_txt_tit">${product.name }</h2> 
                    <!--  <em class="preview_txt_dsc">₩12,000 ~ </em> -->

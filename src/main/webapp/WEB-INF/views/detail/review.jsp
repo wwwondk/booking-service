@@ -17,7 +17,7 @@
                                     <div>
                                         <div class="review_area">
                                             <div class="thumb_area">
-                                                <a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="/files/${ritem.thumbnailFileId}" alt="리뷰이미지"> </a> <span class="img_count">${ritem.thumbnailCount }</span>                                                </div>
+                                                <a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="/files/${ritem.thumbnailFileId}?size=90" alt="리뷰이미지"> </a> <span class="img_count">${ritem.thumbnailCount }</span>                                                </div>
                                             <h4 class="resoc_name">${product.name }</h4>
                                             <p class="review">${ritem.comment }</p>
                                         </div>

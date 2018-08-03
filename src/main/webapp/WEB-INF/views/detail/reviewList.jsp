@@ -9,7 +9,7 @@
            	<c:if test="${ritem.thumbnailFileId ne 0 }">
             <div class="review_area">
                	<div class="thumb_area" data-comment-id="${ritem.id}">
-                   <a class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="/files/${ritem.thumbnailFileId}" alt="리뷰이미지"> </a> <span class="img_count">${ritem.thumbnailCount }</span>                                                
+                   <a class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="/files/${ritem.thumbnailFileId}?size=90" alt="리뷰이미지"> </a> <span class="img_count">${ritem.thumbnailCount }</span>                                                
                    </div>
 
                	<h4 class="resoc_name title" data-product-id="${product.id}">${product.name }</h4>
