@@ -3,17 +3,12 @@ package com.booking.api;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.awt.image.Raster;
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
 
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
 import javax.servlet.http.HttpServletRequest;
 
-import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
