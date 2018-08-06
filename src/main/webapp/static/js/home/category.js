@@ -15,15 +15,16 @@ var Category = (function(){
 		
 		this.categoryTab = categoryTab;
 		this.box = box;
-		
 		this.source = $(source).html();
 		this.templete = Handlebars.compile(this.source);
 		
 		bindEvents.apply(this);
+		setLazyLoad();
 	}
 	
 	function bindEvents(){
 		$(this.categoryTab).on('click', 'li.item', clickCategory.bind(this));
+		$(this.box).on('change', setLazyLoad.bind(this));
 	}
 	
 	function clickCategory(e){
@@ -45,13 +46,15 @@ var Category = (function(){
 	// 상품리스트 가져오기
 	function getProductList(){
 		var templete = this.templete;
+		var box = $(this.box);
 		var leftBox = $(this.box.left);
 		var rightBox = $(this.box.right);
+		
 		$.ajax({
 			url : '/categories/'+this.categoryId+'/products',
 			method : 'GET',
 			data : {'page' : this.page}
-		}).done(function(res){
+		}).done(function(res, callback){
 
 			var leftItemList = [];
 			var rightItemList = [];
@@ -64,15 +67,21 @@ var Category = (function(){
 	        }
 			$(leftBox).append(templete({products: leftItemList}));
 			$(rightBox).append(templete({products: rightItemList}));
-
+			$(box).trigger('change');
 		});
-		
+
 	}
 	
 	function pagePlus(){
 		this.page++;
 	}
 	
+	function setLazyLoad(){
+		$(this.box).find('.lazy').lazyload({
+			threshold:199
+		});
+	}
+
 	return {
 		init : init,
 		page : this.page,

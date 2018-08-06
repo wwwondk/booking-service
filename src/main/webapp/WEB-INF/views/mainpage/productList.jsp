@@ -44,7 +44,7 @@
               <li class="item">
                   <a href="/product-detail/${product.productId }" class="item_book">
                       <div class="item_preview"> 
-                      	<img alt="${product.productName}" class="img_thumb" src="/files/${product.fileId }?size=199">
+                      	<img alt="${product.productName}" class="img_thumb lazy" src="/files/${product.fileId }?size=199" data-original="/files/${product.fileId }?size=199">
                       	<span class="img_border"></span> 
                       </div>
                       <div class="event_txt">
@@ -63,7 +63,7 @@
               <li class="item">
                   <a href="/product-detail/${product.productId }" class="item_book">
                       <div class="item_preview"> 
-                      	<img alt="${product.productName}" class="img_thumb" src="/files/${product.fileId }?size=199">
+                      	<img alt="${product.productName}" class="img_thumb lazy" src="/files/${product.fileId }?size=199" data-original="/files/${product.fileId }?size=199">
                       	<span class="img_border"></span> 
                       </div>
                       <div class="event_txt">
