@@ -19,7 +19,7 @@ var Category = (function(){
 		this.templete = Handlebars.compile(this.source);
 		
 		bindEvents.apply(this);
-		setLazyLoad();
+		setLazyLoad.apply(this);
 	}
 	
 	function bindEvents(){
@@ -77,9 +77,25 @@ var Category = (function(){
 	}
 	
 	function setLazyLoad(){
-		$(this.box).find('.lazy').lazyload({
-			threshold:199
+		console.log('AAAAA');
+		
+		$.each(this.box, function(i, v){
+			$(v).find('.lazy').lazyload({
+				threshold:199,
+				load : storageImage
+			});
 		});
+
+	}
+	
+	function storageImage(){
+		var requestUrl = $(this).attr('src'); 
+		console.log(requestUrl);
+		sessionStorage.setItem(requestUrl, this);
+
+		console.log(this.src);
+		var getImage = sessionStorage.getItem(requestUrl);
+
 	}
 
 	return {
