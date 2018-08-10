@@ -65,8 +65,8 @@ public class FileRestController {
 		    		graphics.drawImage(resizeImage, 0, 0, null);
 		    		graphics.dispose();
 		    		
-		    		String name = originalFileName.substring(originalFileName.lastIndexOf("\\")+1);
-		    		File tempFile = new File(rootPath+"tempImage\\" + name);
+		    		String name = originalFileName.substring(originalFileName.lastIndexOf("/")+1);
+		    		File tempFile = new File("/tempImage/" + name + size);
 		    		if(!tempFile.exists()){
 		    			tempFile.mkdirs();
 		    			ImageIO.write(newImage, "png", tempFile);
