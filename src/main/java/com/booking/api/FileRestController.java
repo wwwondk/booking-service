@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,10 @@ import com.booking.service.FileService;
 
 @RestController
 @RequestMapping("/files")
-@PropertySource("classpath:/auth.properties")
+@PropertySources({
+	@PropertySource(value="classpath:/auth.properties", ignoreResourceNotFound=true),
+	@PropertySource("/auth.properties")
+})
 public class FileRestController {
 	
 	@Value("${naver.login.client.id.query}")
@@ -66,7 +70,7 @@ public class FileRestController {
 		    		graphics.dispose();
 		    		
 		    		String name = originalFileName.substring(originalFileName.lastIndexOf("/")+1);
-		    		File tempFile = new File("/tempImage/" + name + size);
+		    		File tempFile = new File(rootPath+"/"+size+"/tempImage/" + name);
 		    		if(!tempFile.exists()){
 		    			tempFile.mkdirs();
 		    			ImageIO.write(newImage, "png", tempFile);
