@@ -66,8 +66,12 @@ public class FileRestController {
 		    		graphics.dispose();
 		    		
 		    		String name = originalFileName.substring(originalFileName.lastIndexOf("\\")+1);
-		    		ImageIO.write(newImage, "png", new File(rootPath+"tempImage\\" + name));
-		    		file = new File(rootPath+"tempImage\\" + name);
+		    		File tempFile = new File(rootPath+"tempImage\\" + name);
+		    		if(!tempFile.exists()){
+		    			tempFile.mkdirs();
+		    			ImageIO.write(newImage, "png", tempFile);
+		    		}
+		    		file = tempFile;
 				} catch (IOException e) {
 					
 				}
