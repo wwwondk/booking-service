@@ -25,10 +25,7 @@ import com.booking.service.FileService;
 
 @RestController
 @RequestMapping("/files")
-@PropertySources({
-	@PropertySource(value="classpath:/auth.properties", ignoreResourceNotFound=true),
-	@PropertySource("auth.properties")
-})
+@PropertySource("classpath:/auth.properties")
 public class FileRestController {
 	
 	@Value("${naver.login.client.id.query}")

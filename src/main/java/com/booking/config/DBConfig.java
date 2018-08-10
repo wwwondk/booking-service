@@ -21,10 +21,13 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
+@PropertySource("classpath:/database.properties")
+/*
 @PropertySources({
 	@PropertySource(value="classpath:/database.properties", ignoreResourceNotFound=true),
 	@PropertySource("database.properties")
 })
+*/
 @EnableTransactionManagement
 @MapperScan(basePackages = {"com.booking.dao"})
 public class DBConfig {
