@@ -77,24 +77,12 @@ var Category = (function(){
 	}
 	
 	function setLazyLoad(){
-		console.log('AAAAA');
-		
+
 		$.each(this.box, function(i, v){
 			$(v).find('.lazy').lazyload({
-				threshold:199,
-				load : storageImage
+				threshold:199
 			});
 		});
-
-	}
-	
-	function storageImage(){
-		var requestUrl = $(this).attr('src'); 
-		console.log(requestUrl);
-		sessionStorage.setItem(requestUrl, this);
-
-		console.log(this.src);
-		var getImage = sessionStorage.getItem(requestUrl);
 
 	}
 
