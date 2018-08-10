@@ -27,7 +27,7 @@ import com.booking.service.FileService;
 @RequestMapping("/files")
 @PropertySources({
 	@PropertySource(value="classpath:/auth.properties", ignoreResourceNotFound=true),
-	@PropertySource("/auth.properties")
+	@PropertySource("auth.properties")
 })
 public class FileRestController {
 	
