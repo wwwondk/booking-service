@@ -17,10 +17,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.booking.config.AuthUser;
 import com.booking.dao.FileDao;
 import com.booking.dto.FileDto;
-import com.booking.dto.User;
 import com.booking.service.FileService;
 
 @Service
