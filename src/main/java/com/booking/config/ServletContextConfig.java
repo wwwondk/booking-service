@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
@@ -36,7 +36,7 @@ import com.booking.interceptor.LoginCheckInterceptor;
 	"com.booking.controller" })
 @EnableTransactionManagement
 @EnableCaching
-public class ServletContextConfig extends WebMvcConfigurerAdapter {
+public class ServletContextConfig implements WebMvcConfigurer {
 	
 	@Bean
 	public ViewResolver viewResolver() {
@@ -87,7 +87,7 @@ public class ServletContextConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(new LoginCheckInterceptor())
                 .addPathPatterns("/my-reservation/**")
                 .addPathPatterns("/reservations/**");
-        super.addInterceptors(registry);
+        //super.addInterceptors(registry);
     }
     
     @Override
