@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.io.FileSystemResource;
@@ -39,6 +40,7 @@ public class FileRestController {
     }
 
     @GetMapping("/{id}")
+    @Cacheable(value="imageFileCache", key="#id")
     public FileSystemResource downloadFile(@PathVariable int id, @RequestParam(required = false) Integer size, HttpServletRequest request){
     	
     	String rootPath = request.getSession().getServletContext().getRealPath("/");

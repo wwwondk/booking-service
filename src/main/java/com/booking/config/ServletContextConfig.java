@@ -4,9 +4,14 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -30,6 +35,7 @@ import com.booking.interceptor.LoginCheckInterceptor;
 	"com.booking.api",	
 	"com.booking.controller" })
 @EnableTransactionManagement
+@EnableCaching
 public class ServletContextConfig extends WebMvcConfigurerAdapter {
 	
 	@Bean
@@ -83,9 +89,22 @@ public class ServletContextConfig extends WebMvcConfigurerAdapter {
                 .addPathPatterns("/reservations/**");
         super.addInterceptors(registry);
     }
-
+    
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(new AuthUserArgumentResolver());
+    }
+        
+    @Bean
+    public CacheManager cacheManager(){
+    	return new EhCacheCacheManager(ehCacheCacheManager().getObject());
+    }
+    
+    @Bean
+    public EhCacheManagerFactoryBean ehCacheCacheManager() {
+    	EhCacheManagerFactoryBean chCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
+    	chCacheManagerFactoryBean.setConfigLocation(new ClassPathResource("ehcache.xml"));
+    	chCacheManagerFactoryBean.setShared(true);
+    	return chCacheManagerFactoryBean;
     }
 }
