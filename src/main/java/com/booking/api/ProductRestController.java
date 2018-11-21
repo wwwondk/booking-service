@@ -17,12 +17,12 @@ import com.booking.service.ProductService;
 public class ProductRestController {
 
 	private ProductService productService;
-	
+
 	@Autowired
 	public ProductRestController(ProductService productService) {
 		this.productService = productService;
 	}
-	
+
 	@GetMapping("/{id}/products")
 	public List<ProductDto> getList(@PathVariable("id") int categoryId, @RequestParam int page) {
 		return productService.getList(categoryId, page);

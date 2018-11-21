@@ -22,10 +22,10 @@ import com.booking.service.ReviewService;
 @RestController
 @RequestMapping("/comments")
 public class ReviewRestController {
-	
+
 	private ReviewService reviewService;
 	private FileService fileService;
-	
+
 	@Autowired
 	public ReviewRestController(ReviewService reviewService, FileService fileService) {
 		this.reviewService = reviewService;
@@ -33,20 +33,21 @@ public class ReviewRestController {
 	}
 
 	@PostMapping
-	public void insertReview(@RequestParam int starPoint, @RequestParam String comment,	@RequestParam int productId, @RequestParam int reservationId,
-			@RequestParam MultipartFile[] reviewFile, HttpServletRequest request, @AuthUser User user) {
-		
+	public void insertReview(@RequestParam int starPoint, @RequestParam String comment, @RequestParam int productId,
+			@RequestParam int reservationId, @RequestParam MultipartFile[] reviewFile, HttpServletRequest request,
+			@AuthUser User user) {
+
 		int userId = user.getId();
 		reviewService.insertReview(starPoint, comment, reviewFile, request, userId, productId, reservationId);
 	}
-	
+
 	@GetMapping
-	public List<ReviewDto> selectReviewList(@RequestParam("pid") int productId, @RequestParam int page){
+	public List<ReviewDto> selectReviewList(@RequestParam("pid") int productId, @RequestParam int page) {
 		return reviewService.selectProductReviewList(productId, page, 10);
 	}
-	
+
 	@GetMapping("/{commentId}/images")
-	public List<Integer> selectReviewImageList(@PathVariable int commentId){
+	public List<Integer> selectReviewImageList(@PathVariable int commentId) {
 		return fileService.selectReviewImageList(commentId);
 	}
 }

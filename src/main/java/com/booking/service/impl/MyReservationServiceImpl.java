@@ -16,12 +16,12 @@ import com.booking.service.MyReservationService;
 public class MyReservationServiceImpl implements MyReservationService {
 
 	private MyReservationDao myReservationDao;
-	
+
 	@Autowired
 	public MyReservationServiceImpl(MyReservationDao myReservationDao) {
 		this.myReservationDao = myReservationDao;
 	}
-	
+
 	@Override
 	public List<MyReservationDto> selectAll(int userId) {
 		return myReservationDao.selectAll(userId);
@@ -35,13 +35,13 @@ public class MyReservationServiceImpl implements MyReservationService {
 		int due_requesting = 0;
 		int used = 0;
 		int refund_cancel = 0;
-		for(ReservationTypeDto dto : list) {
+		for (ReservationTypeDto dto : list) {
 			String type = dto.getReservationType();
-			if("DUE".equals(type) || "REQUESTING".equals(type)){
+			if ("DUE".equals(type) || "REQUESTING".equals(type)) {
 				due_requesting += dto.getCount();
-			}else if("USED".equals(type)){
+			} else if ("USED".equals(type)) {
 				used = dto.getCount();
-			}else if("REFUND_CANCEL".equals(type)){
+			} else if ("REFUND_CANCEL".equals(type)) {
 				refund_cancel = dto.getCount();
 			}
 			total += dto.getCount();

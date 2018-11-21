@@ -16,28 +16,29 @@ import com.booking.service.ReservationService;
 @RestController
 @RequestMapping("/appointments")
 public class ReservationRestController {
-	private ReservationService reservationService;
 	
+	private ReservationService reservationService;
+
 	@Autowired
 	public ReservationRestController(ReservationService reservationService) {
 		this.reservationService = reservationService;
 	}
-	
+
 	@PostMapping
-	public int insertReservation(@RequestBody ReservationDto reservationDto, @AuthUser User user){
+	public int insertReservation(@RequestBody ReservationDto reservationDto, @AuthUser User user) {
 		reservationDto.setUserId(user.getId());
-		try{
+		try {
 			int rid = reservationService.insertReservation(reservationDto);
 			return rid;
-		}catch(Exception e){
+		} catch (Exception e) {
 			System.out.println("ERROR!");
 			return 0;
 		}
-		
+
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public int deleteReservation(@PathVariable int id){
+	public int deleteReservation(@PathVariable int id) {
 		return reservationService.deleteReservation(id);
 	}
 }

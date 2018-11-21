@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 })
 @Import({DBConfig.class})
 public class RootApplicationContextConfig {
+	
 	@Bean
     public RestTemplate restTemplate() {
         RestTemplate restTemplate = new RestTemplate();

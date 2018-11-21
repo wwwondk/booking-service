@@ -23,11 +23,11 @@ import com.booking.service.FileService;
 
 @Service
 public class FileServiceImpl implements FileService {
-	
+
 	private FileDao fileDao;
-	
+
 	@Autowired
-	public FileServiceImpl(FileDao fileDao){
+	public FileServiceImpl(FileDao fileDao) {
 		this.fileDao = fileDao;
 	}
 
@@ -45,12 +45,12 @@ public class FileServiceImpl implements FileService {
 	public List<Integer> selectProductNoticeImageList(int productId) {
 		return fileDao.selectProductNoticeImageList(productId);
 	}
-	
+
 	@Override
-	public Integer selectProductInformationImage(int productId){
+	public Integer selectProductInformationImage(int productId) {
 		return fileDao.selectProductInformationImage(productId);
 	}
-	
+
 	@Override
 	public List<Integer> selectReviewImageList(int reviewId) {
 		return fileDao.selectReviewImageList(reviewId);
@@ -59,61 +59,62 @@ public class FileServiceImpl implements FileService {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Integer> uploadFile(MultipartFile[] files, HttpServletRequest request, int userId) {
-   	
-    	String path = "\\uploadImg\\" + new SimpleDateFormat("yyyy" + File.separator + "MM" + File.separator + "dd").format(new Date());
 
-        File f = new File(path);
-        if(!f.exists()){ // 파일이 존재하지 않는다면 하위폴더까지 만든다.
-            f.mkdirs();
-        }
-    
-        List<Integer> result = null;
-        if(files.length > 0){
-        	result = new ArrayList<>();
-        }
-        
+		String path = "\\uploadImg\\"
+				+ new SimpleDateFormat("yyyy" + File.separator + "MM" + File.separator + "dd").format(new Date());
+
+		File f = new File(path);
+		if (!f.exists()) { // 파일이 존재하지 않는다면 하위폴더까지 만든다.
+			f.mkdirs();
+		}
+
+		List<Integer> result = null;
+		if (files.length > 0) {
+			result = new ArrayList<>();
+		}
+
 		MultipartFile multipartFile = null;
-		
-		for(int i = 0; i < files.length; i++){
-			
+
+		for (int i = 0; i < files.length; i++) {
+
 			multipartFile = files[i];
 
 			String contentType = multipartFile.getContentType();
-            String originalFilename = multipartFile.getOriginalFilename();
-            long size = multipartFile.getSize();
-            
-            String uuid = UUID.randomUUID().toString();
-            String saveFileName = path + File.separator + uuid; // 저장 절대 경로
-			
-            contentType = "한줄평이미지"; 	//수정하기
- 
-            try{
-                InputStream in = multipartFile.getInputStream();
-                FileOutputStream fos = new FileOutputStream(saveFileName);
-                int readCount = 0;
-                byte[] buffer = new byte[512];
-                while((readCount = in.read(buffer)) != -1){
-                    fos.write(buffer,0,readCount);
-                }
-                
-                FileDto fileDto = new FileDto();
-                fileDto.setUserId(userId);
-                fileDto.setFileName(originalFilename);
-                fileDto.setSaveFileName(saveFileName);
-                fileDto.setFileLength((int)size);
-                fileDto.setContentType(contentType);
-                
-                fileDao.insertImage(fileDto);
-                int fileId = fileDto.getId();
-                result.add(fileId);
-                
-            }catch(Exception ex){
-                ex.printStackTrace();
-                throw new RuntimeException(ex);
-            }
+			String originalFilename = multipartFile.getOriginalFilename();
+			long size = multipartFile.getSize();
+
+			String uuid = UUID.randomUUID().toString();
+			String saveFileName = path + File.separator + uuid; // 저장 절대 경로
+
+			contentType = "한줄평이미지"; // 수정하기
+
+			try {
+				InputStream in = multipartFile.getInputStream();
+				FileOutputStream fos = new FileOutputStream(saveFileName);
+				int readCount = 0;
+				byte[] buffer = new byte[512];
+				while ((readCount = in.read(buffer)) != -1) {
+					fos.write(buffer, 0, readCount);
+				}
+
+				FileDto fileDto = new FileDto();
+				fileDto.setUserId(userId);
+				fileDto.setFileName(originalFilename);
+				fileDto.setSaveFileName(saveFileName);
+				fileDto.setFileLength((int) size);
+				fileDto.setContentType(contentType);
+
+				fileDao.insertImage(fileDto);
+				int fileId = fileDto.getId();
+				result.add(fileId);
+
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				throw new RuntimeException(ex);
+			}
 		}
 		return result;
-		
+
 	}
 
 }

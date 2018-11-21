@@ -87,7 +87,6 @@ public class ServletContextConfig implements WebMvcConfigurer {
         registry.addInterceptor(new LoginCheckInterceptor())
                 .addPathPatterns("/my-reservation/**")
                 .addPathPatterns("/reservations/**");
-        //super.addInterceptors(registry);
     }
     
     @Override
