@@ -2,6 +2,7 @@ package com.booking.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,7 +49,7 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public List<ProductDto> selectByCategory(int categoryId, int page) {
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		Map<String, Integer> map = new HashMap<>();
 		map.put("categoryId", categoryId);
 		map.put("page", page * PRODUCT_UNIT);
 		return productDao.selectByCategory(map);

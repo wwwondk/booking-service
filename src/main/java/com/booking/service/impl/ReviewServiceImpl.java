@@ -60,7 +60,7 @@ public class ReviewServiceImpl implements ReviewService {
 		if(reviewFile.length > 0){
 			List<Integer> fileIdList = fileService.uploadFile(reviewFile, request, userId);
 
-			HashMap<String, Object> param = new HashMap<>();
+			Map<String, Object> param = new HashMap<>();
 			param.put("reservationUserCommentId", reservationUserCommentId);
 			
 			for(int i = 0; i < fileIdList.size(); i++){
