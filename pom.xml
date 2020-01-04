@@ -24,7 +24,7 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 
 		<!-- jackson -->
-		<jackson2.version>2.9.6</jackson2.version>
+		<jackson2.version>2.10.1</jackson2.version>
 	</properties>
 
 	<dependencies>
